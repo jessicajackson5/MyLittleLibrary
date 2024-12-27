@@ -8,5 +8,3 @@ createRoot(document.getElementById('root')).render(
     <App />
   </BrowserRouter>
 )
-
-// list, search, enter a book, save info local storage

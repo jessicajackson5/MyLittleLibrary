@@ -10,8 +10,7 @@ export default function App() {
   const [listBooks, setListBooks] = useState([]);
 
   // sort by readinglog to get trending version
-  const API_URL = 'https://openlibrary.org/search.json?q=' + search + '&limit=10&offset=0';
- 
+  const API_URL = 'https://openlibrary.org/search.json?q=' + search + '&sort=readinglog&order=desc&fields=title,author_name,cover_i&limit=12&offset=0';
 
   const changeSearch = (value) => { setSearch(value); }
 
