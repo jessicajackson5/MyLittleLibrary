@@ -1,29 +1,40 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import { useState, useEffect} from 'react';
+import axios from 'axios';
 
 import { Header } from './components/Header';
 import { Main } from './components/Main';
+
+const API_KEY = 'AIzaSyDyRTkUq9YuhUSuZsQz77ftIfNLMukP4vc';
+const API_URL = 'https://www.googleapis.com/books/v1/volumes';
 
 export default function App() {
 
   const [search, setSearch] = useState('');
   const [listBooks, setListBooks] = useState([]);
 
-  // sort by readinglog to get trending version
-  const API_URL = 'https://openlibrary.org/search.json?q=' + search + '&sort=readinglog&order=desc&fields=title,author_name,cover_i&limit=12&offset=0';
-
   const changeSearch = (value) => { setSearch(value); }
 
   useEffect(()=> {
     const fetchData = async () => {
-      try{
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      const uniqueBooks = removeDuplicateBooks(data.docs);
-
-      setListBooks(uniqueBooks);
+      try {
+        const response = await axios.get(API_URL, {
+            params: {
+                q: search,
+                key: API_KEY,
+                langRestrict: 'en',
+            },
+        });
+        console.log("API Response:", response.data);
+        if(response.data.items && response.data.items.length > 0) {
+          const uniqueBooks = removeDuplicateBooks(response.data.items);
+          setListBooks(uniqueBooks);
+        } else {
+          setListBooks([]);
+        }
       }catch(error){
-        console.log("Error msg: "+ error);
+        console.log("Error fetching books: "+ error);
+        setListBooks([]);
       }
     }
     if(search) {fetchData();}
@@ -32,47 +43,83 @@ export default function App() {
   // Change to Title Case and handle "-", "Mc" "O'" and "Mac" and lowercase articles
   const toTitleCase = (str) => {
     const minorWords = ["a", "an", "the", "and", "but", "or", "for", "nor", "on", "at", "to", "by", "of", "in", "with"];
+    const toExclude = ['TV', 'M*A*S*H*', 'M.A.S.H.', 'MASH','"M"', 'HCL','HCl','NASA', 'N.A.S.A', 'FBI', 'F.B.I.'];
+  
+    // Create a regex pattern from the toExclude list
+    const excludePattern = new RegExp(toExclude.join('|'), 'i');
 
-    return str.replace(/\w\S*/g, function(txt, index) {
-      // Check if the word is a type of article and not the first word
-      if (minorWords.includes(txt.toLowerCase()) && index > 0) {
-        return txt.toLowerCase(); // Keep minor words lowercase
+    return str.split(/\s+/).map((word, index, array) =>  {
+      
+      // Check if the previous word ends with a colon or (
+      const isAfterColon = index > 0 && array[index - 1].endsWith(':');
+
+      // Check if word contains a number or *'s and don't change capitalization
+      if(/\d/.test(word) || /[*]/.test(word) ) {
+        return word;
+      } 
+    
+      // Check if the word matches the exclude pattern
+      if(excludePattern.test(word)) {
+        return word;
       }
 
-      // Handle special cases for "Mc", "Mac", "O'", and hyphenated names
-      return txt.replace(/\b(Mac|Mc|O'|[A-Za-z]+-[A-Za-z]+)?\w+'?\w*/g,
-        function(subStr) {
-          if (subStr.startsWith("Mac")) {
-            // Capitalize "Mac" and the following letter (e.g., MacDonald)
-            return "Mac" + subStr.charAt(3).toUpperCase() + subStr.substr(4).toLowerCase();
-          } else if (subStr.startsWith("Mc")) {
-            // Capitalize "Mc" and the following letter (e.g., McMahon)
-            return "Mc" + subStr.charAt(2).toUpperCase() + subStr.substr(3).toLowerCase();
-          } else if (subStr.startsWith("O'")) {
-            // Capitalize "O'" and the following letter (e.g., O'Connor)
-            return "O'" + subStr.charAt(2).toUpperCase() + subStr.substr(3).toLowerCase();
-          } else if (subStr.includes("'")) {
-            // For possessive cases, keep the apostrophe and "s" lowercase (e.g., Mary's)
-            let parts = subStr.split("'"); // Split at the apostrophe
-            parts[0] = parts[0].charAt(0).toUpperCase() + parts[0].substr(1).toLowerCase();
-            return parts.join("'"); // Recombine with apostrophe
-          }
-          // Default case: capitalize the first letter
-          return subStr.charAt(0).toUpperCase() + subStr.substr(1).toLowerCase();
-        }
-      );
-    });
-  }
+      // Split by hyphen(s)
+      const parts = word.split('-');
 
+      // Capitalize sub-strings after processing as lower case
+      const capitalizedParts = parts.map((part) => {
+        part = part.toLowerCase();
+      
+        //Handle special cases for "Mc", "Mac", "O'", following a parentehsis and hyphenated names
+        if (part.startsWith("mac")) {
+          // Capitalize "Mac" and the following letter (e.g., MacDonald)
+          return "Mac" + part.charAt(3).toUpperCase() + part.slice(4);
+        } else if (part.startsWith("mc")) {
+          // Capitalize "Mc" and the following letter (e.g., McMahon)
+          return "Mc" + part.charAt(2).toUpperCase() + part.slice(3);
+        } else if (part.startsWith("o'")) {
+          // Capitalize "O'" and the following letter (e.g., O'Connor)
+          return "O'" + part.charAt(2).toUpperCase() + part.slice(3);
+        } else if(part.startsWith("(")){
+          // Capitalize the first letter after the parenthesis
+          return "(" + part.charAt(1).toUpperCase() + part.slice(2);
+        } else if (part.includes("'")) {
+          // For possessive cases, keep the apostrophe and "s" lowercase (e.g., Mary's)
+          let posParts = part.split("'"); 
+          posParts[0] = posParts[0].charAt(0).toUpperCase() + posParts[0].slice(1);
+          return posParts.join("'"); // Recombine with apostrophe
+        }
+
+        // Capitalize the first letter of the word if it's the first word or after a colon
+        if(index ===0 || isAfterColon) {
+          return part.charAt(0).toUpperCase() + part.slice(1);
+        }
+
+        // Check if the word is a minor word
+        if (minorWords.includes(part) && index>0) {
+          return part.toLowerCase(); // Keep minor words lowercase
+        }
+        
+        // Capitalize normally
+        return part.charAt(0).toUpperCase() + part.slice(1);
+      });
+ 
+      // Join the capitalized parts back together with hyphens
+      return capitalizedParts.join('-');
+      
+    }).join(' '); // Join the words back together with spaces    
+    
+  }
+  
   const removeDuplicateBooks = (listBooks) => {
     const distinctBooks = new Map();
 
     listBooks.forEach((book) => {
-      const title = toTitleCase(book.title || "");
-      const hasCover = book.cover_i;
+      const title = toTitleCase(book.volumeInfo?.title || '');
+      const hasCover = book.volumeInfo?.imageLinks?.thumbnail;
 
       // Store book title in TitleCase
-      book.title = title;
+      book.volumeInfo.title = title;
       // Store or replace unique books with a cover
       if(!distinctBooks.has(title)){
         //title not already stored
@@ -87,12 +134,17 @@ export default function App() {
   
   return (
     <>
-      <Header search={search} changeSearch={changeSearch} />
-
+      <Header changeSearch={changeSearch} />
+   
       <Routes>
-        <Route index path = "/" element={ <Main listBooks={listBooks} search={search} toTitleCase={toTitleCase} removeDuplicateBooks={removeDuplicateBooks}/>} />
+        <Route index path = "/" element={ 
+          <Main listBooks={listBooks} 
+                search={search} 
+                toTitleCase={toTitleCase} 
+                removeDuplicateBooks={removeDuplicateBooks}
+                showRandomBook={!search || listBooks.length === 0}/>} />
       </Routes>
     </>
-  )
+  );
 }
 

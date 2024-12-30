@@ -1,20 +1,21 @@
-import { Subjects } from './Subjects';
-import { BookList } from './BookList';
+// import { Subjects } from './Subjects';
+// import { BookList } from './BookList';
 import { RandomBook } from './RandomBook';
 
-export function Main({listBooks, toTitleCase}){
-    const IMG_URL = 'https://covers.openlibrary.org/b/id/';
+
+export function Main({listBooks, toTitleCase, showRandomBook }){
+    
     return (
         <>
-        <RandomBook toTitleCase={toTitleCase}/>
+            {showRandomBook && <RandomBook toTitleCase={toTitleCase}/>}
             <div className = "listBooks">
             {listBooks ? (listBooks.map((item,index) => (
                 <div key={index} className="book-card">
-                    <img src={IMG_URL + item.cover_i + "-M.jpg"} alt={item.title}/>
-                    <h2> {item.title}</h2>
+                    <img src={item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail || "https://via.placeholder.com/150"} alt={toTitleCase(item.volumeInfo.title || "Untitled")}/>
+                    <h2> {item.volumeInfo.title}</h2>
                 </div>
-            ))): // make sure the below error message goes away with results
-                (<p>No books found.</p>) 
+            ))): 
+                (<p>No results. Please enter alternate search term(s).</p>) 
             }
             </div>
         </>
