@@ -209,9 +209,9 @@ input:focus {
 }
 
 .subj-active {
-    transform: scale(1.1) rotate(-1deg); /* Enlarge on hover */
+    transform: none;
+    transform: scale(1.1) rotate(-1deg) !important; /* Enlarge on hover */
     transition: transform 0.2s ease-in-out;
-    background-color: red;
 }
 /*--RANDOM BOOK--*/
 .book-generator{

@@ -4,6 +4,6 @@ export function Book(){
     const {id} = useParams();
     console.log(id);
     return(
-        <div className="book">
+        <div className="book">book: {id}</div>
     );
 }
