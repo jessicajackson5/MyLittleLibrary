@@ -1,8 +1,9 @@
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 
 export function Book(){
     const {id} = useParams();
+    console.log(id);
     return(
-        <p>test page id: {id}</p>
+        <div className="book">
     );
 }

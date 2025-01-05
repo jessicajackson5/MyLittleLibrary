@@ -1,4 +1,9 @@
-export function Subjects ({changeSubject, changeSearch}) {
+import {useState, useEffect} from 'react';
+
+export function Subjects ({subject, changeSubject}) {
+    const [activeSubj, setActiveSubj] = useState(null);
+    console.log('Initial Render - subject fprop:', subject, 'activeSubj state:', activeSubj);
+
     const bookSubjects = [
         'Romance',
         'Nonfiction',
@@ -16,9 +21,15 @@ export function Subjects ({changeSubject, changeSearch}) {
         'Young Adults',
         'Kids'
     ];
+    useEffect(() => {
+        console.log('Prop subject changed:', subject);
+        setActiveSubj(subject); // Sync activeSubj with the subject prop
+    }, [subject]);
+
     const handleSubject = (subject) => {
+        console.log('Subject clicked:', subject);
         changeSubject(subject);
-   
+        setActiveSubj(subject);
     };
 
     return(
@@ -26,9 +37,9 @@ export function Subjects ({changeSubject, changeSearch}) {
             {bookSubjects.map((item,index) => (
                     <div 
                         key = {index}
-                        className = 'book'
+                        className={`book ${activeSubj === item ? 'subj-active' : ''}`}
                         onClick={()=>handleSubject(item)} 
-                        aria-label ={`Find ${item} books`}
+                        aria-label ={`Display ${item} books`}
                     >
                     <span>{item}</span>
                     </div>

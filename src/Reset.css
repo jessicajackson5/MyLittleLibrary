@@ -48,7 +48,6 @@ body{
 .dotted {
 	--dotSize: 0.5rem;
     --dot: #1F3B3B;
-    aspect-ratio: 1;
 	width: 100vw;
     min-height: 100%;
 	position: relative;
