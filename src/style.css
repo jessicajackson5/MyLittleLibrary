@@ -80,6 +80,7 @@ input:focus {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
     text-align: center;
     position: relative;
+    cursor:pointer;
 }
 .book span {
     transform: rotate(-90deg); /* Rotate the text */

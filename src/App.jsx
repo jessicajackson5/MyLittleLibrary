@@ -54,10 +54,11 @@ export default function App() {
       }
     };
     const getSubjectBooks = async () => {
+      const query = `subject:fiction ${subject}`
       try {
           const subjResponse = await axios.get(API_URL, {
               params: {
-                  q: subject,
+                  q: query,
                   key: API_KEY,
                   langRestrict: 'en'
               },
@@ -216,9 +217,9 @@ export default function App() {
                   listSubjectBooks={listSubjectBooks}
             />
           } />
-          <Route path = "/book/:id" element= {<Book />} />
+          <Route path = "/book/:id" element= {<Book />}/>
         </Routes>
-        </div> 
+      </div> 
     </>
   );
 }

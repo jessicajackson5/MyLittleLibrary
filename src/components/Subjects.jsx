@@ -1,4 +1,4 @@
-export function Subjects ({subject, changeSubject, toTitleCase}) {
+export function Subjects ({changeSubject, changeSearch}) {
     const bookSubjects = [
         'Romance',
         'Nonfiction',
@@ -13,10 +13,12 @@ export function Subjects ({subject, changeSubject, toTitleCase}) {
         'Graphic Novel',
         'Poetry',
         'Mystery',
-        'Young Adult'
+        'Young Adults',
+        'Kids'
     ];
     const handleSubject = (subject) => {
         changeSubject(subject);
+   
     };
 
     return(
@@ -31,7 +33,6 @@ export function Subjects ({subject, changeSubject, toTitleCase}) {
                     <span>{item}</span>
                     </div>
             ))}
-            {/*<div className = 'book'><span>{bookGenre[1]}</span></div>*/}
         </section>
     );
 }

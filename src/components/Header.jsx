@@ -46,7 +46,7 @@ export function Header ({subject, changeSearch, changeSubject, toTitleCase, rese
                 </div>
 
             </header>
-            <Subjects subject={subject} changeSubject={changeSubject} toTitleCase={toTitleCase}/>
+            <Subjects subject={subject} changeSubject={changeSubject} toTitleCase={toTitleCase} changeSearch={changeSubject}/>
         </>
     );
 }

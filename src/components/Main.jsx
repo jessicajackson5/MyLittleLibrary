@@ -14,9 +14,9 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
                 </>
             )}
             {/* Case 2: Show Search Results only*/}
-            {search && (
+            {search && listSearchBooks.length > 0 && (
                 <section className = "container" id="list-container">
-                    <h2>Books for "{search}"</h2>
+                    <h2>Books about "{search}"</h2>
                     <div id = "list-books">
                         {listSearchBooks && listSearchBooks.length > 0 ? 
                             (listSearchBooks.map((item,index) => (
