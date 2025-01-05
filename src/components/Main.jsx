@@ -29,9 +29,11 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
                                 />
                                 <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
                                 </Link>
-                            ))):(
+                            ))): listSearchBooks === null || listSearchBooks === undefined ? (
+                                <p>Searching...</p> 
+                              ) : (
                                 <p>No results. Please enter alternate search term(s).</p>
-                            )}
+                              )}
                     </div>
                 </section>
             )}

@@ -33,24 +33,27 @@ export default function App() {
   useEffect(()=> {
     const getRecommendedBooks = async () => {
       try {
-          const recoResponse = await axios.get(API_URL, {
-              params: {
-                  q: 'a',
-                  key: API_KEY,
-                  langRestrict: 'en'
-              },
-          });
-          console.log("Recommmended Books:", recoResponse.data.items);
-          if(recoResponse.data.items && recoResponse.data.items.length > 0) {
-            const recoBooks = removeDuplicateBooks(recoResponse.data.items);
-            setRecommendedBooks(recoBooks);
-            setListSubjectBooks([]);
-            setListSearchBooks([]);
-          } else {
-            setRecommendedBooks([]);}
+        const phrase = "new york brains";
+        const recoQuery = `subject:fiction ${phrase}`;
+
+        const recoResponse = await axios.get(API_URL, {
+         params: {
+          q: recoQuery,
+          key: API_KEY,
+          langRestrict: 'en'
+        },
+        });
+        console.log("Recommmended Books:", recoResponse.data.items);
+        if(recoResponse.data.items && recoResponse.data.items.length > 0) {
+          const recoBooks = removeDuplicateBooks(recoResponse.data.items);
+          setRecommendedBooks(recoBooks);
+          setListSubjectBooks([]);
+          setListSearchBooks([]);
+        } else {
+          setRecommendedBooks([]);}
       } catch (error) {
-          console.error("Error in getting recommended book list:", error);
-          setRecommendedBooks([]);
+        console.error("Error in getting recommended book list:", error);
+        setRecommendedBooks([]);
       }
     };
     const getSubjectBooks = async () => {

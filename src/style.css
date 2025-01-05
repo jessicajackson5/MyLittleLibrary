@@ -277,6 +277,7 @@ p { font-weight: 100;}
 /*--LIST BOOK - MULTIPLE COMPONENTS--*/
 #list-container{
     margin-top: 2rem;
+    padding-bottom: 2rem;
 }
 #list-books{
     width: 100%;
@@ -289,6 +290,7 @@ p { font-weight: 100;}
 .book-card{
     background-color: rgba(37, 72, 72, .7);
     display: flex;
+    width: 
     flex-direction: column;
     align-items: center;
     padding: 1rem;
@@ -344,7 +346,7 @@ p { font-weight: 100;}
 }
 
 @media (max-width: 550px) {
-    .container {padding-inline: 8%;}
+    .container {padding-inline: 6%;}
     .input{
         width: 100%;
         min-width: 100px;
@@ -362,4 +364,5 @@ p { font-weight: 100;}
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+     }
 }  

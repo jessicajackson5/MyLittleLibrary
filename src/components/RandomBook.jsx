@@ -4,6 +4,7 @@ import axios from 'axios';
 export function RandomBook ({toTitleCase}) { 
     const [book, setBook] = useState(null);
     const [description, setDescription] = useState(null);
+    const [title, setTitle] = useState(null);
    
     const[isLoading,setIsLoading] = useState(true);
 
@@ -23,7 +24,7 @@ export function RandomBook ({toTitleCase}) {
             
             const response = await axios.get(API_URL, {
                 params: {
-                    q: randomWord.data[0],
+                    q: randomWord.data[0],                    
                     key: API_KEY,
                     langRestrict: 'en',
                     maxResults: 1
@@ -32,8 +33,15 @@ export function RandomBook ({toTitleCase}) {
                 if (response.data.items && response.data.items.length > 0) {
                     const fetchedBook = response.data.items[0];
                     setBook(fetchedBook);
+
+                    // Shorten overly long title
+                    const bookTitle = fetchedBook.volumeInfo?.title || '';
+                    setTitle(
+                        bookTitle.slice(0, 80) + 
+                        (bookTitle.length > 80 ? '...' : '')
+                    );
     
-                    // Process overly long descriptions
+                    // Shorten overly long descriptions
                     const bookDescription = fetchedBook.volumeInfo?.description || '';
                     setDescription(
                         bookDescription.slice(0, 800) + 
@@ -41,6 +49,7 @@ export function RandomBook ({toTitleCase}) {
                     );
                 } else {
                     setBook(null);
+                    setTitle('');
                     setDescription('');
                 }
             } catch (error) {
@@ -76,7 +85,7 @@ export function RandomBook ({toTitleCase}) {
                         )}
                     </div>
                     <div className = 'book-info'>
-                        <h3>{toTitleCase(book.volumeInfo?.title || 'Untitled').trim()}</h3>
+                        <h3>{title || 'Untitled'}</h3>
                         <p>by {Array.isArray(book.volumeInfo?.authors) && book.volumeInfo.authors.length > 0
                             ? toTitleCase(book.volumeInfo.authors.join(', '))
                             : 'Unknown Author'}
