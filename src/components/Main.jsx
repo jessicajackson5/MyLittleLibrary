@@ -37,7 +37,7 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
                 </section>
             )}
             {/* Case 3: Show Search Results only*/}
-            {search && listSearchBooks.length > 1 && (
+            {search && listSearchBooks.length > 0 && (
                 <section className = "container" id="list-container">
                     <h2>Books about "{search}"</h2>
                     <div id = "list-books">

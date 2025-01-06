@@ -8,6 +8,7 @@ export function Header ({subject, changeSearch, changeSubject, toTitleCase, rese
 
     const handleLogoClick = () => {
         resetState();
+        setPrevSearch(''); //Clear the input field
     };
     const handleSearch = () => {
         changeSearch(prevSearch); //Update the parent search state

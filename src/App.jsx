@@ -45,8 +45,6 @@ export default function App() {
         if(recoResponse.data.items && recoResponse.data.items.length > 0) {
           const recoBooks = removeDuplicateBooks(recoResponse.data.items);
           setRecommendedBooks(recoBooks);
-          /*setListSubjectBooks([]);
-          setListSearchBooks([]);*/
         } else {
           setRecommendedBooks([]);}
       } catch (error) {
@@ -67,8 +65,7 @@ export default function App() {
           if(subjResponse.data.items && subjResponse.data.items.length > 0) {
             const subjBooks = removeDuplicateBooks(subjResponse.data.items);
             setListSubjectBooks(subjBooks);
-            /*setRecommendedBooks([]);
-            setListSearchBooks([]);*/
+ 
           } else {
             setListSubjectBooks([]);}
       } catch (error) {
@@ -88,8 +85,6 @@ export default function App() {
         if(response.data.items && response.data.items.length > 0) {
           const uniqueBooks = removeDuplicateBooks(response.data.items);
           setListSearchBooks(uniqueBooks);
-          /*setListSubjectBooks([]);
-          setRecommendedBooks([]);*/
         } else {
           setListSearchBooks([]);}
       }catch(error){
