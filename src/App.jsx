@@ -60,6 +60,7 @@ export default function App() {
       }
     };
     const getSubjectBooks = async () => {
+      setIsSubLoading(true); // Show spinner before fetch
       let query ='';
       if(subject==='Nonfiction'){
         query = 'subject:nonfiction';
@@ -83,9 +84,12 @@ export default function App() {
       } catch (error) {
           console.error("Error in getting books by subject:", error);
           setListSubjectBooks([]);
-      }
+        }finally{
+          setIsSubLoading(false);
+        }
     };
     const getSearchBooks = async () => {
+      setIsSearchLoading(true); // Show spinner before fetch
       try {
         const response = await axios.get(API_URL, {
             params: {
@@ -102,6 +106,8 @@ export default function App() {
       }catch(error){
         console.error("Error fetching books: ", error);
         setListSearchBooks([]);
+      }finally{
+        setIsSearchLoading(false);
       }
     }
     if ( subject){

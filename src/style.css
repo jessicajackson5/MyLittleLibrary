@@ -319,6 +319,14 @@ p { font-weight: 100;}
     white-space: normal;
     overflow: hidden;
 }
+.no-image{
+    background-color: rgba(19, 36, 36, .7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 100px;
+}
 
 /*--ONE BOOK DETAIL--*/
 .one-book{

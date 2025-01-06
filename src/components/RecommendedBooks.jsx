@@ -12,9 +12,12 @@ export function RecommendedBooks ({toTitleCase, recommendedBooks, setIsRecoLoadi
                             src={item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail }
                             alt={toTitleCase((item.volumeInfo.title || "Untitled").trim())}
                             onLoad={() => setIsRecoLoading(false)}
+                            onError={() => setIsRecoLoading(false)} 
                         />
                     ) : (
-                        <p>No image available</p>
+                        <div className="no-image">
+                            <p>No image available</p>
+                        </div>
                     )}
                     <h4> {toTitleCase(item.volumeInfo?.title || 'Untitled').trim()}</h4>
                 </div>
