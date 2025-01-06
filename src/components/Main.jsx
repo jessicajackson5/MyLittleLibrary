@@ -13,31 +13,7 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
                     <RecommendedBooks toTitleCase={toTitleCase} recommendedBooks={recommendedBooks} />
                 </>
             )}
-            {/* Case 2: Show Search Results only*/}
-            {search && listSearchBooks.length > 0 && (
-                <section className = "container" id="list-container">
-                    <h2>Books about "{search}"</h2>
-                    <div id = "list-books">
-                        {listSearchBooks && listSearchBooks.length > 0 ? 
-                            (listSearchBooks.map((item,index) => (
-                                <Link key={index} className="book-card" to={`/book/id:${item.id}`}>
-                                    <img src={
-                                        item.volumeInfo?.imageLinks?.thumbnail ||
-                                        item.volumeInfo?.imageLinks?.smallThumbnail 
-                                    } 
-                                    alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
-                                />
-                                <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
-                                </Link>
-                            ))): listSearchBooks === null || listSearchBooks === undefined ? (
-                                <p>Searching...</p> 
-                              ) : (
-                                <p>No results. Please enter alternate search term(s).</p>
-                              )}
-                    </div>
-                </section>
-            )}
-            {/* Case 3: Show books by Subject only*/}
+            {/* Case 2: Show books by Subject only*/}
             {subject && (
                 <section className = "container" id="list-container">
                     <div className="title-container">
@@ -60,6 +36,31 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
                     </div>
                 </section>
             )}
+            {/* Case 3: Show Search Results only*/}
+            {search && listSearchBooks.length > 1 && (
+                <section className = "container" id="list-container">
+                    <h2>Books about "{search}"</h2>
+                    <div id = "list-books">
+                        {listSearchBooks && listSearchBooks.length > 0 ? 
+                            (listSearchBooks.map((item,index) => (
+                                <Link key={index} className="book-card" to={`/book/id:${item.id}`}>
+                                    <img src={
+                                        item.volumeInfo?.imageLinks?.thumbnail ||
+                                        item.volumeInfo?.imageLinks?.smallThumbnail 
+                                    } 
+                                    alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
+                                />
+                                <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
+                                </Link>
+                            ))): listSearchBooks === null || listSearchBooks === undefined ? (
+                                <p>Searching...</p> 
+                              ) : (
+                                <p>No results. Please enter alternate search term(s).</p>
+                              )}
+                    </div>
+                </section>
+            )}
+            
         </>
     );
 }

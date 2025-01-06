@@ -26,7 +26,6 @@ export default function App() {
     setSearch('');
     setSubject('');
     setListSearchBooks([]);
-    setRecommendedBooks([]);
     setListSubjectBooks([]);
   };
 
@@ -43,12 +42,11 @@ export default function App() {
           langRestrict: 'en'
         },
         });
-        console.log("Recommmended Books:", recoResponse.data.items);
         if(recoResponse.data.items && recoResponse.data.items.length > 0) {
           const recoBooks = removeDuplicateBooks(recoResponse.data.items);
           setRecommendedBooks(recoBooks);
-          setListSubjectBooks([]);
-          setListSearchBooks([]);
+          /*setListSubjectBooks([]);
+          setListSearchBooks([]);*/
         } else {
           setRecommendedBooks([]);}
       } catch (error) {
@@ -66,12 +64,11 @@ export default function App() {
                   langRestrict: 'en'
               },
           });
-          console.log("Subject Books:", subjResponse.data.items);
           if(subjResponse.data.items && subjResponse.data.items.length > 0) {
             const subjBooks = removeDuplicateBooks(subjResponse.data.items);
             setListSubjectBooks(subjBooks);
-            setRecommendedBooks([]);
-            setListSearchBooks([]);
+            /*setRecommendedBooks([]);
+            setListSearchBooks([]);*/
           } else {
             setListSubjectBooks([]);}
       } catch (error) {
@@ -88,21 +85,24 @@ export default function App() {
                 langRestrict: 'en',
             },
         });
-        console.log("Get search books:", response.data);
         if(response.data.items && response.data.items.length > 0) {
           const uniqueBooks = removeDuplicateBooks(response.data.items);
           setListSearchBooks(uniqueBooks);
-          setListSubjectBooks([]);
-          setRecommendedBooks([]);
+          /*setListSubjectBooks([]);
+          setRecommendedBooks([]);*/
         } else {
           setListSearchBooks([]);}
       }catch(error){
-        console.log("Error fetching books: "+ error);
+        console.error("Error fetching books: ", error);
         setListSearchBooks([]);
       }
     }
-    if( search ) { getSearchBooks(); }
-      else if( subject ) { getSubjectBooks();}
+    if ( subject){
+      setListSearchBooks([]);
+      getSubjectBooks();
+    } else if ( search){
+      setListSubjectBooks([]);
+      getSearchBooks();}
       else { getRecommendedBooks(); }
   }, [search, subject]);
 
