@@ -8,11 +8,11 @@ import { Main } from './components/Main';
 import { Book } from './components/Book';
 
 
+
 export default function App() {
   const API_KEY = 'AIzaSyDyRTkUq9YuhUSuZsQz77ftIfNLMukP4vc';
   const API_URL = 'https://www.googleapis.com/books/v1/volumes';
-  const BOOK_URL = 'https://books.google.com/books?'
-
+  
   const [search, setSearch] = useState('');
   const [subject, setSubject] = useState('');
   const [listSearchBooks, setListSearchBooks] = useState([]);
@@ -21,6 +21,9 @@ export default function App() {
 
   const changeSearch = (value) => { setSearch(value); }
   const changeSubject = (value) => { setSubject(value); }
+  const [isSubLoading, setIsSubLoading] = useState(true);
+  const [isSearchLoading, setIsSearchLoading] = useState(true);
+  const [isRecoLoading, setIsRecoLoading] = useState(true);
 
   const resetState = () => {
     setSearch('');
@@ -31,6 +34,7 @@ export default function App() {
 
   useEffect(()=> {
     const getRecommendedBooks = async () => {
+      setIsRecoLoading(true); // Show spinner before fetch
       try {
         const phrase = "new york brains";
         const recoQuery = `subject:fiction ${phrase}`;
@@ -48,18 +52,26 @@ export default function App() {
         } else {
           setRecommendedBooks([]);}
       } catch (error) {
-        console.error("Error in getting recommended book list:", error);
         setRecommendedBooks([]);
+        console.error("Error in getting recommended book list:", error);
+        
+      }finally{
+        setIsRecoLoading(false);
       }
     };
     const getSubjectBooks = async () => {
-      const query = `subject:fiction ${subject}`
+      let query ='';
+      if(subject==='Nonfiction'){
+        query = 'subject:nonfiction';
+      }else{
+        query = `subject:fiction ${subject}`;
+      }
       try {
           const subjResponse = await axios.get(API_URL, {
               params: {
                   q: query,
                   key: API_KEY,
-                  langRestrict: 'en'
+                  langRestrict: 'en',
               },
           });
           if(subjResponse.data.items && subjResponse.data.items.length > 0) {
@@ -208,10 +220,13 @@ export default function App() {
           <Route index path = "/" element= { 
            <Main listSearchBooks={listSearchBooks} 
                   search={search} 
+                  isSearchLoading={isSearchLoading}
                   toTitleCase={toTitleCase} 
-                  showRandomBook={!search || listSearchBooks.length === 0}
+                  // showRandomBook={!search || listSearchBooks.length === 0}
                   subject={subject}
+                  isSubjLoading={isSubLoading}
                   recommendedBooks={recommendedBooks}
+                  isRecoLoading={isRecoLoading}
                   listSubjectBooks={listSubjectBooks}
             />
           } />

@@ -2,7 +2,7 @@ import { RandomBook } from './RandomBook';
 import { RecommendedBooks } from './RecommendedBooks';
 import { Link} from 'react-router-dom';
 
-export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitleCase, recommendedBooks }){
+export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitleCase, recommendedBooks,isRecoLoading }){
     
     return (
         <>
@@ -10,7 +10,7 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
             {!search && !subject &&(
                 <>
                     <RandomBook toTitleCase={toTitleCase}/>
-                    <RecommendedBooks toTitleCase={toTitleCase} recommendedBooks={recommendedBooks} />
+                    <RecommendedBooks toTitleCase={toTitleCase} recommendedBooks={recommendedBooks} isRecoLoading={isRecoLoading} />
                 </>
             )}
             {/* Case 2: Show books by Subject only*/}
@@ -43,7 +43,7 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
                     <div id = "list-books">
                         {listSearchBooks && listSearchBooks.length > 0 ? 
                             (listSearchBooks.map((item,index) => (
-                                <Link key={index} className="book-card" to={`/book/id:${item.id}`}>
+                                <Link key={index} className="book-card" to={`/book/${item.id}`}>
                                     <img src={
                                         item.volumeInfo?.imageLinks?.thumbnail ||
                                         item.volumeInfo?.imageLinks?.smallThumbnail 

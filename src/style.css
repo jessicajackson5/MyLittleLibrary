@@ -320,6 +320,13 @@ p { font-weight: 100;}
     overflow: hidden;
 }
 
+/*--ONE BOOK DETAIL--*/
+.one-book{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*--RESPONSIVE--*/
 @media (max-width: 768px) {
     .container {padding-inline: 8%;}

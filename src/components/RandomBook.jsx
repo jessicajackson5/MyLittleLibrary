@@ -5,8 +5,7 @@ export function RandomBook ({toTitleCase}) {
     const [book, setBook] = useState(null);
     const [description, setDescription] = useState(null);
     const [title, setTitle] = useState(null);
-   
-    const[isLoading,setIsLoading] = useState(true);
+    const [isLoading,setIsLoading] = useState(true);
 
     const API_KEY = 'AIzaSyDyRTkUq9YuhUSuZsQz77ftIfNLMukP4vc';
     const API_URL = 'https://www.googleapis.com/books/v1/volumes';
@@ -18,13 +17,14 @@ export function RandomBook ({toTitleCase}) {
     }, []);
 
     const fetchData = async () => {
-        setIsLoading(true);
+        setIsLoading(true); // Show spinner before fetch
         try {
             const randomWord = await axios.get(WORD_URL);
+            const randQuery = `subject:fiction ${randomWord.data[0]}`;
             
             const response = await axios.get(API_URL, {
                 params: {
-                    q: randomWord.data[0],                    
+                    q: randQuery,                    
                     key: API_KEY,
                     langRestrict: 'en',
                     maxResults: 1
@@ -44,13 +44,13 @@ export function RandomBook ({toTitleCase}) {
                     // Shorten overly long descriptions
                     const bookDescription = fetchedBook.volumeInfo?.description || '';
                     setDescription(
-                        bookDescription.slice(0, 800) + 
-                        (bookDescription.length > 800 ? '...' : '')
+                        bookDescription.slice(0, 650) + 
+                        (bookDescription.length > 650 ? '...' : '')
                     );
                 } else {
                     setBook(null);
                     setTitle('');
-                    setDescription('');
+                    setDescription('No book data available');
                 }
             } catch (error) {
                 console.error("Error Message: " + error);
@@ -85,12 +85,19 @@ export function RandomBook ({toTitleCase}) {
                         )}
                     </div>
                     <div className = 'book-info'>
-                        <h3>{title || 'Untitled'}</h3>
-                        <p>by {Array.isArray(book.volumeInfo?.authors) && book.volumeInfo.authors.length > 0
-                            ? toTitleCase(book.volumeInfo.authors.join(', '))
-                            : 'Unknown Author'}
-                        </p>
-                        <p>{description}</p>
+                        {isLoading? (
+                            <p>Loading book details...</p>
+                        ) : (
+                            <>
+                                <h3>{title || 'Untitled'}</h3>
+                                <p>by {Array.isArray(book.volumeInfo?.authors) && 
+                                    book.volumeInfo.authors.length > 0
+                                    ? toTitleCase(book.volumeInfo.authors.join(', '))
+                                    : 'Unknown Author'}
+                                </p>
+                                <p>{description}</p>
+                            </>
+                        )}
                     </div>
                 </div>
             </article>

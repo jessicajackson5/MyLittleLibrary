@@ -25,14 +25,14 @@ export function Subjects ({subject, changeSubject}) {
     return(
         <section id='book-nav' className="container">
             {bookSubjects.map((item,index) => (
-                    <div 
-                        key = {index}
-                        className={`book ${subject === item ? 'subj-active' : ''}`}
-                        onClick={()=>handleSubject(item)} 
-                        aria-label ={`Display ${item} books`}
-                    >
-                    <span>{item}</span>
-                    </div>
+                 <div 
+                    key = {index}
+                    className={`book ${subject === item ? 'subj-active' : ''}`}
+                    onClick={()=>handleSubject(item)} 
+                    aria-label ={`Display ${item} books`}
+                >
+                <span>{item}</span>                   
+                </div>
             ))}
         </section>
     );
