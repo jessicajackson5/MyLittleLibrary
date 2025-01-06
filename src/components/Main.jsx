@@ -40,7 +40,9 @@ export function Main({listSearchBooks, search, subject, listSubjectBooks, toTitl
             {/* Case 3: Show books by Subject only*/}
             {subject && (
                 <section className = "container" id="list-container">
-                    <h2>The Best {toTitleCase(subject)} Books</h2>
+                    <div className="title-container">
+                        <h2>The Best {toTitleCase(subject)} Books</h2>
+                    </div>
                     <div id = "list-books">
                     {listSubjectBooks && listSubjectBooks.length > 0 ? (listSubjectBooks.map((item,index) => (
                         <div key={index} className="book-card">

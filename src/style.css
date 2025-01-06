@@ -264,6 +264,12 @@ input:focus {
     display:grid;
     grid-template-columns: 160px 4fr;
 }
+.book-detail p{
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    max-height: 150px;
+}
 h2{
     font-family: 'La Belle Aurore', cursive;
     color: var(--title);
@@ -278,6 +284,9 @@ p { font-weight: 100;}
 #list-container{
     margin-top: 2rem;
     padding-bottom: 2rem;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(1, span 4);
 }
 #list-books{
     width: 100%;
@@ -285,24 +294,32 @@ p { font-weight: 100;}
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 .book-card{
     background-color: rgba(37, 72, 72, .7);
     display: flex;
-    width: 
+    height: 275px;
+    min-width: 150px;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     padding: 1rem;
     gap: 1rem;
     box-shadow: 2px 2px 2px var(--dark);
 }
 .book-card img{    
     height:150px;
+    max-width: 120px;
 }
 .book-card h4{
     font-size: var(--h4);
     font-weight:100;
+    max-width: 100%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
 }
 
 /*--RESPONSIVE--*/
@@ -312,18 +329,20 @@ p { font-weight: 100;}
         display: flex;
         padding: 3% 0 6%;
         gap: 10px;
-        margin: 0px 0px 6%;
+        margin: 0px 0px 10%;
         flex-direction: column; /* Stack the logo and search bar */
         align-items: center;
     }
     .input{
-        width: 100%;
         min-width: 180px;
         max-width: 400px;
     }
     .form-data{
         width: 100%;
-        min-width: 180px;
+        min-width: 160px;
+        justify-content: center;
+    }
+    #book-nav {
         justify-content: center;
     }
     /*--RANDOM BOOK RESPONSIVE--*/
@@ -333,36 +352,85 @@ p { font-weight: 100;}
     .book-detail{
         display: flex;
         flex-direction: column;
+        align-items: center;
+    }
+    .book-image {
+        padding-bottom: 1rem;
+    }
+    .book-info h3{
+        font-size: var(--h4);
     }
     /*--LIST BOOK RESPONSIVE--*/
     #list-books{
-        display: flex;
-        padding-top: 1rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
         align-items: center;
     }
 }
-
 @media (max-width: 550px) {
-    .container {padding-inline: 6%;}
-    .input{
-        width: 100%;
-        min-width: 100px;
-        max-width: 70%;
+    /*change subjects*/
+    .book-generator{
+        justify-content: center;
     }
+    
+    .form-data{
+        width: 90%;
+        min-width: 120px;
+        justify-content: center;
+    }
+    #list-container{
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(1, span 2);
+        text-align: center;
+    }
+    #list-books{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+@media (max-width: 450px) {
+    .container {padding-inline: 6%;}
+  
     .logo img{
         width: 40px;
         height: 40px;
     }
      /*--LIST BOOK RESPONSIVE--*/
-     #list-books{
+     #list-container{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    #list-books{
         display: flex;
         padding-top: 1rem;
-        display: flex;
         flex-direction: column;
-        gap: 1rem;
         align-items: center;
-     }
-}  
+    }
+    .book-card{
+        width: 90%;
+    }
+    .book-card{
+        background-color: rgba(37, 72, 72, .7);
+        display: flex;
+        height: 275px;
+        min-width: 150px;
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+        gap: 1rem;
+        box-shadow: 2px 2px 2px var(--dark);
+    }
+    .book-card h4{
+        font-size: var(--h5);
+        font-weight:100;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .book-card img{    
+        height:200px;
+    }
+}
