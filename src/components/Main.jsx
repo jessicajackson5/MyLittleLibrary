@@ -12,9 +12,8 @@ export function Main({
     isRecoLoading, 
     setIsRecoLoading, 
     isSearchLoading, 
-    setIsSearchLoading,
     isSubLoading, 
-    setIsSubLoading }){
+  }){
     
     return (
         <>

@@ -22,7 +22,7 @@ export default function App() {
 
   const changeSearch = (value) => { setSearch(value); }
   const changeSubject = (value) => { setSubject(value); }
-  const changeDetail = (value) => { setDetail(value); }
+
   const [isSubLoading, setIsSubLoading] = useState(true); 
   const [isSearchLoading, setIsSearchLoading] = useState(true);
   const [isRecoLoading, setIsRecoLoading] = useState(true);
@@ -80,7 +80,7 @@ export default function App() {
           if(subjResponse.data.items && subjResponse.data.items.length > 0) {
             const subjBooks = removeDuplicateBooks(subjResponse.data.items);
             setListSubjectBooks(subjBooks);
- 
+            setListSearchBooks([]);
           } else {
             setListSubjectBooks([]);}
       } catch (error) {
@@ -103,6 +103,7 @@ export default function App() {
         if(response.data.items && response.data.items.length > 0) {
           const uniqueBooks = removeDuplicateBooks(response.data.items);
           setListSearchBooks(uniqueBooks);
+          setListSubjectBooks([]);
         } else {
           setListSearchBooks([]);}
       }catch(error){
