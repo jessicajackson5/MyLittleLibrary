@@ -19,7 +19,6 @@ export function Book({toTitleCase, changeDetail}){
                 const data = response.data;
                 setOneBook(data);
                 changeDetail(id);
-                
 
                 // Shorten overly long title
                 const bookTitle = data.volumeInfo?.title || '';
@@ -87,4 +86,5 @@ export function Book({toTitleCase, changeDetail}){
         </div>
     );
 }
-
+// Cuando cargo los detalles de un libro, no detecta cambios en el header como search o click en subject
+// Quiero agregar mas libros en scroll
