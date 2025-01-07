@@ -21,7 +21,7 @@ export default function App() {
 
   const changeSearch = (value) => { setSearch(value); }
   const changeSubject = (value) => { setSubject(value); }
-  const [isSubLoading, setIsSubLoading] = useState(true);
+  const [isSubLoading, setIsSubLoading] = useState(true); 
   const [isSearchLoading, setIsSearchLoading] = useState(true);
   const [isRecoLoading, setIsRecoLoading] = useState(true);
 
@@ -227,12 +227,15 @@ export default function App() {
            <Main listSearchBooks={listSearchBooks} 
                   search={search} 
                   isSearchLoading={isSearchLoading}
+                  setIsSearchLoading={setIsSearchLoading}
                   toTitleCase={toTitleCase} 
                   // showRandomBook={!search || listSearchBooks.length === 0}
                   subject={subject}
-                  isSubjLoading={isSubLoading}
+                  isSubLoading={isSubLoading}
+                  setIsSubLoading={setIsSubLoading}
                   recommendedBooks={recommendedBooks}
-                  isRecoLoading={isRecoLoading}
+                  isRecoLoading={isRecoLoading} 
+                  setIsRecoLoading={setIsRecoLoading} 
                   listSubjectBooks={listSubjectBooks}
             />
           } />

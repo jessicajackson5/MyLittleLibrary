@@ -63,14 +63,15 @@ export function RandomBook ({toTitleCase}) {
 
     return(
         <>
-        { book && 
-            <article className = 'container'>
-                <div className = 'book-generator'>
-                    <h2>Book of the day</h2>
-                    <button className = 'again' onClick = { () =>fetchData() }><img src = './images/againIcon.png' alt='Load another random book' />
-                    </button>
-                </div>
-                <div className = 'book-detail'>
+        { <article className = 'container'>
+            <div className = 'book-generator'>
+                <h2>Book of the day</h2>
+                <button className = 'again' onClick = { () =>fetchData() }>
+                    <img src = './images/againIcon.png' 
+                    alt='Load another random book' />
+                </button>
+            </div>
+             <div className = 'book-detail'>
                     <div className = {`book-image ${isLoading ? 'loading' : ''}`}>
                         {isLoading ? (
                             <div className="loading-spinner"></div> 
@@ -79,6 +80,7 @@ export function RandomBook ({toTitleCase}) {
                                 src={book.volumeInfo?.imageLinks?.thumbnail || book.volumeInfo?.imageLinks?.smallThumbnail} 
                                 alt={toTitleCase((book.volumeInfo?.title || 'Untitled').trim())} 
                                 onLoad={() => setIsLoading(false)}
+                                onError={() => setIsLoading(false)} 
                             />
                         ) : (
                             <p>No image available</p>

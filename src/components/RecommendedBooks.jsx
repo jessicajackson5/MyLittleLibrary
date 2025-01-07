@@ -6,7 +6,9 @@ export function RecommendedBooks ({toTitleCase, recommendedBooks, setIsRecoLoadi
             {recommendedBooks && recommendedBooks.length > 0 ? (recommendedBooks.map((item,index) => (
                 <div key={index} className="book-card">
                     {isRecoLoading ? (
-                        <div className="loading-spinner"></div> 
+                        <div className="load">
+                           <div className="load-spin"></div>
+                        </div>
                     ) : item.volumeInfo?.imageLinks ? (
                         <img 
                             src={item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail }
