@@ -1,9 +1,9 @@
 import {useEffect,useState} from 'react';
-import {useParams, Link} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
 
-export function Book({toTitleCase}){
+export function Book({toTitleCase, changeDetail}){
     const {id} = useParams();
     const API_URL = "https://www.googleapis.com/books/v1/volumes/";
     const [oneBook, setOneBook] = useState(null);
@@ -18,6 +18,8 @@ export function Book({toTitleCase}){
                 const response = await axios.get(`${API_URL}${id}`);
                 const data = response.data;
                 setOneBook(data);
+                changeDetail(id);
+                
 
                 // Shorten overly long title
                 const bookTitle = data.volumeInfo?.title || '';
@@ -55,15 +57,15 @@ export function Book({toTitleCase}){
                     alt={oneTitle} 
                     onLoad={() => setIsLoading(false)}
                     onError={() => setIsLoading(false)} 
-                />
-            ) : (
+                    />
+                ) : (
                 <p>No image available</p>
-            )}
-        </div>
-        <div className = 'book-info'>
-            {isLoading? (
+                )}
+            </div>
+            <div className = 'book-info'>
+                {isLoading? (
                 <p>Loading book details...</p>
-            ) : (
+                ) : (
                 <>
                     <h3>{oneTitle || 'Untitled'}</h3>
                     <p>by {Array.isArray(oneBook.volumeInfo?.authors) && 
@@ -80,10 +82,9 @@ export function Book({toTitleCase}){
                     <br />
                     <p>{oneDescription}</p>
                 </>
-            )}
+                )}
+            </div>
         </div>
-
-    </div>  
     );
 }
 

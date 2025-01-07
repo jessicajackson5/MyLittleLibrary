@@ -1,6 +1,6 @@
 import { RandomBook } from './RandomBook';
 import { RecommendedBooks } from './RecommendedBooks';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 export function Main({
     listSearchBooks, 
@@ -48,21 +48,21 @@ export function Main({
                             ))
                         ) : listSubjectBooks.length > 0 ? (
                             listSubjectBooks.map((item, index) => (
-                                <Link key={index} className="book-card" to={`/book/${item.id}`}>
-                                {item.volumeInfo?.imageLinks ? (
-                                    <img 
-                                        src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail} 
-                                        alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
-                                        onLoad={() => setIsSearchLoading(false)}
-                                        onError={() => setIsSearchLoading(false)} 
-                                    />
-                                ) : (
-                                    <div className="no-image">
-                                        <p>No image available</p>
-                                    </div>
+                                <div key={index} className="book-card">
+                                    {item.volumeInfo?.imageLinks ? (
+                                        <img
+                                            src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnaill } 
+                                            alt={toTitleCase((item.volumeInfo.title || "Untitled").trim())}
+                                            onLoad={() => setIsSubLoading(false)}
+                                            onError={() => setIsSubLoading(false)} 
+                                        />
+                                    ) : (
+                                        <div className="no-image">
+                                            <p>No image available</p>
+                                        </div>
                                     )}
-                                    <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
-                                </Link>
+                                    <h4> {toTitleCase(item.volumeInfo?.title || 'Untitled').trim()}</h4>
+                                </div>
                             ))):(
                             <p>No results. Please select another subject.</p>
                         )

@@ -10,7 +10,8 @@ import { Book } from './components/Book';
 
 
 export default function App() {
-  const API_KEY = 'AIzaSyDyRTkUq9YuhUSuZsQz77ftIfNLMukP4vc';
+  //const API_KEY = 'AIzaSyDyRTkUq9YuhUSuZsQz77ftIfNLMukP4vc';
+  const API_KEY = 'AIzaSyCUKqGdOyqRqN4nmOuZBbFmtNib4758EUY';
   const API_URL = 'https://www.googleapis.com/books/v1/volumes';
   
   const [search, setSearch] = useState('');
@@ -22,6 +23,7 @@ export default function App() {
 
   const changeSearch = (value) => { setSearch(value); }
   const changeSubject = (value) => { setSubject(value); }
+  const changeDetail = (value) => { setDetail(value); }
   const [isSubLoading, setIsSubLoading] = useState(true); 
   const [isSearchLoading, setIsSearchLoading] = useState(true);
   const [isRecoLoading, setIsRecoLoading] = useState(true);
@@ -113,13 +115,19 @@ export default function App() {
       }
     }
     if ( subject){
+      //setDetail([]);
       setListSearchBooks([]);
       getSubjectBooks();
     } else if ( search){
+      //setDetail([]);
       setListSubjectBooks([]);
-      getSearchBooks();}
+      getSearchBooks();
+    //}else if (detail) {
+      //setListSearchBooks([]);
+      //setListSubjectBooks([]);
+    }
       else { getRecommendedBooks(); }
-  }, [search, subject]);
+  }, [search, subject, detail]);
 
   // Change to Title Case and handle "-", "Mc" "O'" and "Mac" and lowercase articles
   const toTitleCase = (str) => {
@@ -221,7 +229,7 @@ export default function App() {
               subject={subject} 
               changeSubject={changeSubject}
               toTitleCase={toTitleCase}
-              resetState={resetState}
+              changeDetail={changeDetail}
         />
    
         <Routes>
@@ -240,7 +248,7 @@ export default function App() {
                   listSubjectBooks={listSubjectBooks}
             />
           } />
-          <Route path = "/book/:id" element= {<Book toTitleCase={toTitleCase}  />}/>
+          <Route path = "/book/:id" element= {<Book toTitleCase={toTitleCase} detail={detail} changeDetail={changeDetail} />}/>
         </Routes>
       </div> 
     </>
