@@ -32,7 +32,6 @@ export default function App() {
     setSubject('');
     setListSearchBooks([]);
     setListSubjectBooks([]);
-    setDetail([]);
   };
 
   useEffect(()=> {
@@ -222,7 +221,7 @@ export default function App() {
               subject={subject} 
               changeSubject={changeSubject}
               toTitleCase={toTitleCase}
-              changeDetail={changeDetail}
+              resetState={resetState}
         />
    
         <Routes>
@@ -241,10 +240,10 @@ export default function App() {
                   listSubjectBooks={listSubjectBooks}
             />
           } />
-          <Route path = "/book/:id" element= {<Book toTitleCase={toTitleCase} detail={detail} changeDetail={changeDetail} />}/>
+          <Route path = "/book/:id" element= {<Book toTitleCase={toTitleCase} />}/>
         </Routes>
       </div> 
     </>
   );
-}
 
+}
