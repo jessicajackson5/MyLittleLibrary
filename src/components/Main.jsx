@@ -30,7 +30,7 @@ export function Main({
                 </>
             )}
             {/* Case 2: Show books by Subject only*/}
-            {subject && (
+            {search && listSubjectBooks.length > 0 &&(
                 <section className = "container" id="list-container">
                     <div className="title-container">
                         <h2>The Best {toTitleCase(subject)} Books</h2>
@@ -67,7 +67,7 @@ export function Main({
                 </section>
             )}
             {/* Case 3: Show Search Results only*/}
-            {search && (
+            {search && listSearchBooks.length > 0 && (
                 <section className = "container" id="list-container">
                     <div className="title-container">
                         <h2>Results for "{search}"</h2>
