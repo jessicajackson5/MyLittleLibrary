@@ -29,7 +29,7 @@ export function Header ({subject, changeSearch, changeSubject, toTitleCase, rese
                 <div className='left-content'>
                     {/*Logo and title*/}
                     <Link to="/" className='logo' onClick={handleLogoClick}>
-                        <img src='./images/popArtReader.jpg' alt='Site logo is a woman reading a book'/>
+                        <img src='/images/popArtReader.jpg' alt='Site logo is a woman reading a book'/>
                     </Link>
                     <h1>MyLittleLibrary</h1>
                 </div>

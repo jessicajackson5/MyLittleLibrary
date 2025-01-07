@@ -311,6 +311,7 @@ p { font-weight: 100;}
     max-width: 120px;
     object-fit: contain;
 }
+
 .load{
     display: flex;
     height: 100%;
@@ -329,6 +330,7 @@ p { font-weight: 100;}
 }
 .book-card h4{
     font-size: var(--h4);
+    color: var(--text);
     font-weight:100;
     max-width: 100%;
     display: inline-block;
@@ -347,9 +349,15 @@ p { font-weight: 100;}
 
 /*--ONE BOOK DETAIL--*/
 .one-book{
-    display: flex;
+    display:grid;
+    grid-template-columns: 160px 4fr;
     align-items: center;
     justify-content: center;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    padding-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 /*--RESPONSIVE--*/

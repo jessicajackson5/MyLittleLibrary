@@ -15,6 +15,7 @@ export default function App() {
   
   const [search, setSearch] = useState('');
   const [subject, setSubject] = useState('');
+  const [detail, setDetail] = useState('');
   const [listSearchBooks, setListSearchBooks] = useState([]);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [listSubjectBooks, setListSubjectBooks] = useState([]);
@@ -30,6 +31,7 @@ export default function App() {
     setSubject('');
     setListSearchBooks([]);
     setListSubjectBooks([]);
+    setDetail([]);
   };
 
   useEffect(()=> {
@@ -229,7 +231,6 @@ export default function App() {
                   isSearchLoading={isSearchLoading}
                   setIsSearchLoading={setIsSearchLoading}
                   toTitleCase={toTitleCase} 
-                  // showRandomBook={!search || listSearchBooks.length === 0}
                   subject={subject}
                   isSubLoading={isSubLoading}
                   setIsSubLoading={setIsSubLoading}
@@ -239,7 +240,7 @@ export default function App() {
                   listSubjectBooks={listSubjectBooks}
             />
           } />
-          <Route path = "/book/:id" element= {<Book />}/>
+          <Route path = "/book/:id" element= {<Book toTitleCase={toTitleCase}  />}/>
         </Routes>
       </div> 
     </>
