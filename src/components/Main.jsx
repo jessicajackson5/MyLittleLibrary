@@ -46,28 +46,25 @@ export function Main({
                                     </div>
                                 </div>
                             ))
-                        ) : listSubjectBooks.length > 0 ? (
-                            listSubjectBooks.map((item, index) => (
-                                <div key={index} className="book-card">
+                        ): listSubjectBooks.length > 0 ? 
+                            (listSubjectBooks.map((item,index) => (
+                                <Link key={index} className="book-card" to={`/book/${item.id}`}>
                                     {item.volumeInfo?.imageLinks ? (
-                                        <img
-                                            src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnaill } 
-                                            alt={toTitleCase((item.volumeInfo.title || "Untitled").trim())}
-                                            onLoad={() => setIsSubLoading(false)}
-                                            onError={() => setIsSubLoading(false)} 
+                                        <img 
+                                            src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail} 
+                                            alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
                                         />
                                     ) : (
                                         <div className="no-image">
                                             <p>No image available</p>
                                         </div>
-                                    )}
-                                    <h4> {toTitleCase(item.volumeInfo?.title || 'Untitled').trim()}</h4>
-                                </div>
-                            ))):(
-                            <p>No results. Please select another subject.</p>
-                        )
-                        }
-                    </div>
+                                        )}
+                                        <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
+                                </Link>
+                            ))): (
+                                <p>No results. Please enter alternate search term(s).</p>
+                              )}
+                        </div>
                 </section>
             )}
             {/* Case 3: Show Search Results only*/}
@@ -93,8 +90,6 @@ export function Main({
                                         <img 
                                             src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail} 
                                             alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
-                                            onLoad={() => setIsSearchLoading(false)}
-                                            onError={() => setIsSearchLoading(false)} 
                                         />
                                     ) : (
                                         <div className="no-image">

@@ -114,15 +114,15 @@ export default function App() {
         setIsSearchLoading(false);
       }
     }
-    if ( subject){
+    if(subject && subject.length > 0){
       //setDetail([]);
       setListSearchBooks([]);
       getSubjectBooks();
-    } else if ( search){
+    } else if (search && search.length > 0){
       //setDetail([]);
       setListSubjectBooks([]);
       getSearchBooks();
-    //}else if (detail) {
+    }else if (detail && detail.length > 0) {
       //setListSearchBooks([]);
       //setListSubjectBooks([]);
     }
