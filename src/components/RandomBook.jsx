@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export function RandomBook ({toTitleCase}) { 
@@ -71,38 +72,46 @@ export function RandomBook ({toTitleCase}) {
                     alt='Load another random book' />
                 </button>
             </div>
-             <div className = 'book-detail'>
-                    <div className = {`book-image ${isLoading ? 'loading' : ''}`}>
-                        {isLoading ? (
-                            <div className="loading-spinner"></div> 
-                        ) : book && book.volumeInfo?.imageLinks ? (
+            {isLoading ? (
+                <div className="loading-section">
+                    <div className="book-image loading">
+                        <div className="loading-spinner"></div>
+                    </div>
+                    <div className="loading-info">
+                        <p>Loading book details...</p>
+                    </div>
+                   
+                </div>
+            ) : book ? (
+                <Link className = 'book-detail' to={`/book/${book.id}`}>
+                    <div className = 'book-image'>
+                        {book.volumeInfo?.imageLinks ? (
                             <img 
                                 src={book.volumeInfo?.imageLinks?.thumbnail || book.volumeInfo?.imageLinks?.smallThumbnail} 
                                 alt={toTitleCase((book.volumeInfo?.title || 'Untitled').trim())} 
-                                onLoad={() => setIsLoading(false)}
-                                onError={() => setIsLoading(false)} 
                             />
                         ) : (
                             <p>No image available</p>
                         )}
                     </div>
                     <div className = 'book-info'>
-                        {isLoading? (
-                            <p>Loading book details...</p>
-                        ) : (
-                            <>
-                                <h3>{title || 'Untitled'}</h3>
-                                <p>by {Array.isArray(book.volumeInfo?.authors) && 
-                                    book.volumeInfo.authors.length > 0
-                                    ? toTitleCase(book.volumeInfo.authors.join(', '))
-                                    : 'Unknown Author'}
-                                </p>
-                                <p>{description}</p>
-                            </>
-                        )}
+                        <h3>{title || 'Untitled'}</h3>
+                        <p>by {Array.isArray(book.volumeInfo?.authors) && 
+                            book.volumeInfo.authors.length > 0
+                            ? toTitleCase(book.volumeInfo.authors.join(', '))
+                            : 'Unknown Author'}
+                        </p>
+                        <p>{description}</p>
                     </div>
-                </div>
-            </article>
+                </Link>
+                ) : (
+                <>
+                    <div className = 'book-info'>
+                        <p>No book data vailable.</p>
+                    </div>
+                </>
+                )}
+        </article>
         }
         </>
     );
