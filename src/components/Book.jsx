@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
 
-export function Book({toTitleCase, changeDetail}){
+export function Book({toTitleCase}){
     const {id} = useParams();
     const API_URL = "https://www.googleapis.com/books/v1/volumes/";
     const [oneBook, setOneBook] = useState(null);
@@ -18,7 +18,6 @@ export function Book({toTitleCase, changeDetail}){
                 const response = await axios.get(`${API_URL}${id}`);
                 const data = response.data;
                 setOneBook(data);
-                changeDetail(id);
 
                 // Shorten overly long title
                 const bookTitle = data.volumeInfo?.title || '';

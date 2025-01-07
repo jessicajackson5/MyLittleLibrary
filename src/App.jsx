@@ -16,7 +16,6 @@ export default function App() {
   
   const [search, setSearch] = useState('');
   const [subject, setSubject] = useState('');
-  const [detail, setDetail] = useState('');
   const [listSearchBooks, setListSearchBooks] = useState([]);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [listSubjectBooks, setListSubjectBooks] = useState([]);
@@ -115,19 +114,13 @@ export default function App() {
       }
     }
     if(subject && subject.length > 0){
-      //setDetail([]);
       setListSearchBooks([]);
       getSubjectBooks();
     } else if (search && search.length > 0){
-      //setDetail([]);
       setListSubjectBooks([]);
       getSearchBooks();
-    }else if (detail && detail.length > 0) {
-      //setListSearchBooks([]);
-      //setListSubjectBooks([]);
-    }
-      else { getRecommendedBooks(); }
-  }, [search, subject, detail]);
+    } else { getRecommendedBooks(); }
+  }, [search, subject]);
 
   // Change to Title Case and handle "-", "Mc" "O'" and "Mac" and lowercase articles
   const toTitleCase = (str) => {

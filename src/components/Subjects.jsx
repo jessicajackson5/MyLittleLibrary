@@ -1,4 +1,4 @@
-export function Subjects ({subject, changeSubject, changeDetail}) {
+export function Subjects ({subject, changeSubject}) {
 
     const bookSubjects = [
         'Romance',
@@ -19,7 +19,6 @@ export function Subjects ({subject, changeSubject, changeDetail}) {
     ];
 
     const handleSubject = (subject) => {
-        changeDetail('');
         changeSubject(subject);
     };
 
