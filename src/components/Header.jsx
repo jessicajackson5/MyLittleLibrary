@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { HiSearch } from 'react-icons/hi';
 import { Subjects } from './Subjects.jsx'
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export function Header ({subject, changeSearch, changeSubject, toTitleCase, resetState, changeDetail}) { 
+export function Header ({subject, changeSearch, changeSubject, toTitleCase, resetState}) { 
     const [prevSearch, setPrevSearch] = useState('');
 
     const handleLogoClick = () => {
@@ -48,7 +48,7 @@ export function Header ({subject, changeSearch, changeSubject, toTitleCase, rese
                 </div>
 
             </header>
-            <Subjects subject={subject} changeSubject={changeSubject} toTitleCase={toTitleCase} changeSearch={changeSubject} changeDetail={changeDetail}/>
+            <Subjects subject={subject} changeSubject={changeSubject} />
         </>
     );
 }

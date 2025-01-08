@@ -1,3 +1,5 @@
+import './subjects.css';
+
 export function Subjects ({subject, changeSubject}) {
 
     const bookSubjects = [
