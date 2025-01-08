@@ -66,8 +66,7 @@ export function Book({toTitleCase}){
                 ) : (
                 <>
                     <h3>{oneTitle || 'Untitled'}</h3>
-                    <p>by {Array.isArray(oneBook.volumeInfo?.authors) && 
-                        oneBook.volumeInfo.authors.length > 0
+                    <p> by {oneBook?.volumeInfo?.authors && Array.isArray(oneBook.volumeInfo.authors) && oneBook.volumeInfo.authors.length > 0
                         ? toTitleCase(oneBook.volumeInfo.authors.join(', '))
                         : 'Unknown Author'}
                     </p>
@@ -85,5 +84,4 @@ export function Book({toTitleCase}){
         </div>
     );
 }
-// Cuando cargo los detalles de un libro, no detecta cambios en el header como search o click en subject
-// Quiero agregar mas libros en scroll
+

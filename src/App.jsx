@@ -164,9 +164,6 @@ export default function App() {
       "F.B.I.",
     ];
 
-    // Create a regex pattern from the toExclude list
-    const excludePattern = new RegExp(toExclude.join("|"), "i");
-
     return str
       .split(/\s+/)
       .map((word, index, array) => {
@@ -174,12 +171,7 @@ export default function App() {
         const isAfterColon = index > 0 && array[index - 1].endsWith(":");
 
         // Check if word contains a number or *'s and don't change capitalization
-        if (/\d/.test(word) || /[*]/.test(word)) {
-          return word;
-        }
-
-        // Check if the word matches the exclude pattern
-        if (excludePattern.test(word)) {
+        if (/\d/.test(word) || /[*]/.test(word) || RegExp(toExclude.join("|"), "i").test(word)) {
           return word;
         }
 
