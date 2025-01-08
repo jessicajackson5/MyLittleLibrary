@@ -1,67 +1,5 @@
-/*--HEADER--*/
-#header{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0 2rem;
-}
-.left-content{
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-}
-.logo img{
-    display: flex;
-    width: 60px;
-    height: 60px;
-    border-radius: 100%;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.form-data {
-    width:100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.input {
-    background-color: var(--text);
-    color: var(--input);
-    width: 100%;
-    max-width: 550px;
-    height: 30px;
-    border-radius: 16px 0px 0px 16px;
-    padding: 0 2rem 0 1rem;
-    border: none;
-}
-input:focus {
-    outline: none;
-    filter: brightness(110%);
-}
-.button{
-    display: flex;
-    border-radius: 0px 16px 16px 0px;
-    padding: 0.375rem 0.7rem;
-    background-color: #9A9AFF;
-    border: none;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.button svg {
-    width: 18px; 
-    height:18px; 
-    margin: 0px;
-    color: var(--text);
-}
-.button:hover {
-    filter: brightness(120%);
-}
 /*--RANDOM BOOK--*/
-.book-generator{
+.book-generator {
     display: flex;
     align-items: center;
     margin-top: 2rem;
@@ -85,59 +23,59 @@ input:focus {
     height: 40px;
     animation: spin 1s linear infinite;
 }
-.loading-section{
+.loading-section {
     display:flex;
     flex-direction: row;
 }
-.loading-info{
+.loading-info {
     width:100%;
     padding-left: 3rem;
 }
-@keyframes spin{
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-.book-image img{
+.book-image img {
     width: 128px;
     height: auto;
     box-shadow: 5px 5px 5px var(--dark);
     transform: rotate(-5deg);
 }
-.again{
+.again {
     background: transparent;
     border: none;
     margin-top: -1rem;
 }
-.again:hover{
+.again:hover {
     transform: scale(1.1);
 }
-.again:active{
+.again:active {
     transform: scale(1);
 }
-.book-detail{
+.book-detail {
     display:grid;
     grid-template-columns: 160px 4fr;
 }
-.book-detail p{
+.book-detail p {
     text-overflow: ellipsis;
     white-space: normal;
     overflow: hidden;
     max-height: 150px;
     color: var(--text);
 }
-h2{
+h2 {
     font-family: 'La Belle Aurore', cursive;
     color: var(--title);
 }
-h3{
+h3 {
     font-size: var(--h3);
     align-items: center;
     color: var(--text);
 }
-p { font-weight: 100;}
+p { font-weight: 100; }
 
 /*--LIST BOOK - MULTIPLE COMPONENTS--*/
-#list-container{
+#list-container {
     margin-top: 2rem;
     padding-bottom: 2rem;
     display: grid;
@@ -145,7 +83,7 @@ p { font-weight: 100;}
     align-items: center;
     width: 100%;
 }
-#list-books{
+#list-books {
     width: 100%;
     padding-top: 1rem;
     display: grid;
@@ -153,7 +91,7 @@ p { font-weight: 100;}
     justify-items: center;
     gap: 2rem;   
 }
-.book-card{
+.book-card {
     background-color: rgba(37, 72, 72, .7);
     display: flex;
     height: 275px;
@@ -165,14 +103,14 @@ p { font-weight: 100;}
     gap: 1rem;
     box-shadow: 2px 2px 2px var(--dark);
 }
-.book-card img{  
+.book-card img {  
     height:150px;
     max-width: 120px;
     object-fit: contain;
     box-shadow: 3px 3px 3px var(--dark);
 }
 
-.load{
+.load {
     display: flex;
     height: 100%;
     width: 100%;
@@ -188,7 +126,7 @@ p { font-weight: 100;}
     height: 40px;
     animation: spin 1s linear infinite;
 }
-.book-card h4{
+.book-card h4 {
     font-size: var(--h4);
     color: var(--text);
     font-weight:100;
@@ -198,7 +136,7 @@ p { font-weight: 100;}
     white-space: normal;
     overflow: hidden;
 }
-.no-image{
+.no-image {
     background-color: rgba(19, 36, 36, .7);
     display: flex;
     justify-content: center;
@@ -208,7 +146,7 @@ p { font-weight: 100;}
 }
 
 /*--ONE BOOK DETAIL--*/
-.one-book{
+.one-book {
     display:grid;
     grid-template-columns: 160px 4fr;
     align-items: center;
@@ -221,8 +159,8 @@ p { font-weight: 100;}
 }
 
 /*--RESPONSIVE--*/
-@media (max-width: 768px) {
-    .container {padding-inline: 8%;}
+@media ( max-width: 768px ) {
+    .container { padding-inline: 8%; }
     #header {
         display: flex;
         padding: 3% 0 6%;
@@ -231,11 +169,11 @@ p { font-weight: 100;}
         flex-direction: column; /* Stack the logo and search bar */
         align-items: center;
     }
-    .input{
+    .input {
         min-width: 180px;
         max-width: 400px;
     }
-    .form-data{
+    .form-data {
         width: 100%;
         min-width: 160px;
         justify-content: center;
@@ -244,10 +182,10 @@ p { font-weight: 100;}
         justify-content: center;
     }
     /*--RANDOM BOOK RESPONSIVE--*/
-    .book-generator{
+    .book-generator {
         margin-top: 2rem;
     }
-    .book-detail{
+    .book-detail {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -257,43 +195,29 @@ p { font-weight: 100;}
     .book-image {
         padding-bottom: 1rem;
     }
-    .book-info h3{
+    .book-info h3 {
         font-size: var(--h4);
         color: var(--text);
     }
    
     /*--LIST BOOK RESPONSIVE--*/
-    #list-books{
+    #list-books {
         grid-template-columns: repeat(3, 1fr);
         align-items: center;
     }
-    .book-card{
+    .book-card {
         padding: 1rem;
     }
     /*--ONE BOOK RESPONSIVE--*/
-    .one-book{
+    .one-book {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 }
-@media (max-width: 550px) {
-    /*change subjects
-    #book-nav {
-        flex-wrap: wrap;
-        row-gap: 1rem;
-    }
-
-    .book-generator{
-        justify-content: center;
-    }*/
-    
-    .form-data{
-        width: 90%;
-        min-width: 120px;
-        justify-content: center;
-    }
+@media ( max-width: 550px ) {  
+    /*--LIST BOOK RESPONSIVE--*/
     #list-container{
         display: grid;
         justify-content: center;
@@ -309,17 +233,6 @@ p { font-weight: 100;}
 
 }
 @media (max-width: 450px) {
-    .container {padding-inline: 6%;}
-    #header {
-        padding: 3%;
-        gap: 10px;
-        margin: 0px 0px 10%;
-    }
-    h1{font-size: var(--h2);}
-    .logo img{
-        width: 40px;
-        height: 40px;
-    }
      /*--LIST BOOK RESPONSIVE--*/
      #list-container{
         display: flex;

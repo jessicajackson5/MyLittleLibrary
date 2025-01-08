@@ -288,6 +288,11 @@
     transition: transform 0.2s ease-in-out;
 }
 /*--RESPONSIVE--*/
+@media ( max-width: 768px ) {
+    #book-nav {
+        justify-content: center;
+    }
+}
 @media (max-width: 550px) {
     /*change subjects*/
     #book-nav {

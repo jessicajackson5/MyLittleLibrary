@@ -1,4 +1,4 @@
-import './subjects.css';
+import './Subjects.css';
 
 export function Subjects ({subject, changeSubject}) {
 
