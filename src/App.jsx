@@ -256,7 +256,6 @@ export default function App() {
     <>
       <div className="dotted">
         <Header
-          search={search}
           changeSearch={changeSearch}
           changeSubject={changeSubject}
           toTitleCase={toTitleCase}

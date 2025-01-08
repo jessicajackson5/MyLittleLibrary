@@ -4,7 +4,7 @@ import { Subjects } from './Subjects.jsx'
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-export function Header ({subject, changeSearch, changeSubject, toTitleCase, resetState}) { 
+export function Header ({subject, changeSearch, changeSubject, resetState}) { 
     const [prevSearch, setPrevSearch] = useState('');
 
     const handleLogoClick = () => {
