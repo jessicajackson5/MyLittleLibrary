@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './RandomBook.css';
 
 export function RandomBook ({toTitleCase}) { 
     const [book, setBook] = useState(null);
