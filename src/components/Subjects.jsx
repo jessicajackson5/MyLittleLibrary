@@ -1,6 +1,7 @@
 import './Subjects.css';
+import { useEffect } from 'react';
 
-export function Subjects ({subject, changeSubject}) {
+export function Subjects ({ subject, changeSubject }) {
 
     const bookSubjects = [
         'Romance',
@@ -20,18 +21,18 @@ export function Subjects ({subject, changeSubject}) {
         'Kids'
     ];
 
-    const handleSubject = (subject) => {
+    const handleSubject = ( subject ) => {
         changeSubject(subject);
     };
 
     return(
-        <section id='book-nav' className="container">
-            {bookSubjects.map((item,index) => (
+        <section id = 'book-nav' className = "container">
+            {bookSubjects.map(( item, index ) => (
                  <div 
-                    key = {index}
-                    className={`book ${subject === item ? 'subj-active' : ''}`}
-                    onClick={()=>handleSubject(item)} 
-                    aria-label ={`Display ${item} books`}
+                    key = { index }
+                    className = { `book ${subject === item ? 'subj-active' : ''}` }
+                    onClick = { ()=> handleSubject(item) }
+                    aria-label = { `Display ${item} books` }
                 >
                 <span>{item}</span>                   
                 </div>

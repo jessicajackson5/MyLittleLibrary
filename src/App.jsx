@@ -19,7 +19,7 @@ export default function App() {
   const [listSubjectBooks, setListSubjectBooks] = useState([]);
 
   const changeSearch = (value) => { setSearch(value); };
-  const changeSubject = (value) => { setSubject(value);};
+  const changeSubject = (value) => { setSubject(value); };
 
   const [isSubLoading, setIsSubLoading] = useState(true);
   const [isSearchLoading, setIsSearchLoading] = useState(true);
@@ -243,6 +243,7 @@ export default function App() {
         <Header
           changeSearch = {changeSearch}
           changeSubject = {changeSubject}
+          subject = {subject} // Keep or it won't recognize the active subject selection
           resetState = {resetState}
         />
         <Routes>
