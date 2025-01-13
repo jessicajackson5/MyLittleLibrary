@@ -258,6 +258,7 @@ export default function App() {
                 setIsSearchLoading = {setIsSearchLoading}
                 toTitleCase = {toTitleCase}
                 subject = {subject}
+                changeSubject = {changeSubject}
                 isSubLoading = {isSubLoading}
                 setIsSubLoading = {setIsSubLoading}
                 recommendedBooks = {recommendedBooks}

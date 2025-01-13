@@ -1,11 +1,14 @@
 import { RandomBook } from './RandomBook';
 import { RecommendedBooks } from './RecommendedBooks';
-import { Link} from 'react-router-dom';
+import { Subjects } from './Subjects.jsx'
+import { Link } from 'react-router-dom';
+
 
 export function Main({
-    listSearchBooks, 
     search, 
-    subject, 
+    listSearchBooks, 
+    subject,
+    changeSubject, 
     listSubjectBooks, 
     toTitleCase, 
     recommendedBooks,
@@ -17,6 +20,7 @@ export function Main({
     
     return (
         <>
+            <Subjects subject = {subject} changeSubject = {changeSubject}/>
             {/* Case 1: Show RandomBook & Recommended*/}
             {!search && !subject &&(
                 <>
