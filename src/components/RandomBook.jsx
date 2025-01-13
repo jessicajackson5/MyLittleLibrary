@@ -54,10 +54,10 @@ export function RandomBook ({toTitleCase}) {
                     setTitle('');
                     setDescription('No book data available');
                 }
-            } catch (error) {
-                console.error("Error Message: " + error);
-                setBook(null);
-                setDescription('Failed to fetch book data.');
+        } catch (error) {
+            console.error("Error Message: " + error);
+            setBook(null);
+            setDescription('Failed to fetch book data.');
         } finally {
             setIsLoading(false);
         }
@@ -68,23 +68,22 @@ export function RandomBook ({toTitleCase}) {
         { <article className = 'container'>
             <div className = 'book-generator'>
                 <h2>Book of the day</h2>
-                <button className = 'again' onClick = { () =>fetchData() }>
-                    <img src = './images/againIcon.png' 
-                    alt='Load another random book' />
+                <button className = 'again' onClick = { () => fetchData() }>
+                <img src = './images/againIcon.png' 
+                alt = 'Load another random book' />
                 </button>
             </div>
             {isLoading ? (
-                <div className="loading-section">
-                    <div className="book-image loading">
-                        <div className="loading-spinner"></div>
+                 <div className = 'loading-section'>
+                    <div className = 'book-image loading'>
+                        <div className = 'loading-spinner'></div>
                     </div>
-                    <div className="loading-info">
+                    <div className = 'loading-info'>
                         <p>Loading book details...</p>
-                    </div>
-                   
+                    </div>            
                 </div>
             ) : book ? (
-                <Link className = 'book-detail' to={`/book/${book.id}`}>
+                <Link className = 'book-detail' to = { `/book/${book.id}` }>
                     <div className = 'book-image'>
                         {book.volumeInfo?.imageLinks ? (
                             <img 
@@ -92,26 +91,26 @@ export function RandomBook ({toTitleCase}) {
                                 alt={toTitleCase((book.volumeInfo?.title || 'Untitled').trim())} 
                             />
                         ) : (
-                            <p>No image available</p>
+                            <div className = 'img-not-available'>
+                                <p>No image available</p>
+                            </div>
                         )}
                     </div>
                     <div className = 'book-info'>
-                        <h3>{title || 'Untitled'}</h3>
-                        <p>by {Array.isArray(book.volumeInfo?.authors) && 
+                        <h3>{ title || 'Untitled' }</h3>
+                        <p>by { Array.isArray(book.volumeInfo?.authors) && 
                             book.volumeInfo.authors.length > 0
                             ? toTitleCase(book.volumeInfo.authors.join(', '))
-                            : 'Unknown Author'}
+                            : 'Unknown Author' }
                         </p>
-                        <p>{description}</p>
+                        <p>{ description }</p>
                     </div>
                 </Link>
-                ) : (
-                <>
-                    <div className = 'book-info'>
-                        <p>No book data vailable.</p>
-                    </div>
-                </>
-                )}
+               ) : (
+                <div className = 'book-info'>
+                    <p>No book data vailable.</p>
+                </div>
+            )}
         </article>
         }
         </>

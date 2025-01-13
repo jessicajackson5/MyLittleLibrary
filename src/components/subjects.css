@@ -4,16 +4,16 @@
     display: flex;
     gap:.1rem;
     justify-content: left;
-    align-items: center;
+    align-items:baseline;
     margin-bottom: 1rem;
 }
 .book {
     display: flex;
     align-items: left;
-    justify-content: center;
+    justify-content: center; 
     width: 2rem;
     height: 8rem; /*book height*/
-    border-radius: 6px;
+    border-radius: 4px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
     text-align: center;
     position: relative;
@@ -27,8 +27,8 @@
     position: absolute;
     left: 50%; /*Center text horizontally */
     top: 50%; /* Center text vertically */
-    transform-origin: center; /* Rotate around the center */
     transform: translate(-50%, -50%) rotate(-90deg);
+    transform-origin: center; /* Rotate around the center */
     color: var(--text);
     font-size: var(--h4);
 }
@@ -36,6 +36,7 @@
 /*--CATEGORY BOOK STYLING--*/
 .book:nth-child(1) {
     background-color: var(--bk-red);
+    transform: rotate(3deg);
 }
 .book:nth-child(2) {
     background-color: var(--bk-brn);
@@ -44,33 +45,42 @@
 }
 .book:nth-child(n+3) {
     background-color: var(--bk-grn);
+    margin-left: 0.2rem;
 }
 .book:nth-child(n+4) {
     background-color: var(--bk-sct);
+    transform: rotate(-5deg);
+    height: 7rem;
 }
 .book:nth-child(5n) {
     background-color: var(--bk-blu);
     transform:rotate(2deg);
     margin-left: .3rem;
+    height: 8rem;
 }
 .book:nth-child(n+6) {
     background-color: var(--bk-vio);
+    height: 8rem;
 }
 .book:nth-child(n+7) {
     background-color: var(--bk-blk);
     width: 3rem;
+    margin: .1rem;
 }
 .book:nth-child(n+8) {
     background-color: var(--bk-brn);
     width: 2rem;
+    margin-left: 0.1rem;
 }
 .book:nth-child(9n) {
     background-color: var(--bk-blu);
-    transform:rotate(2deg);
-    margin-left: .3rem;
+    transform: rotate(4deg);
+    margin-left: .4rem;
+    height: 7.5rem;
 }
 .book:nth-child(10n) {
     background-color: var(--bk-grn);
+    width: 1.5rem;
 }
 .book:nth-child(12) {
     background-color: var(--bk-rsp);
@@ -78,17 +88,28 @@
 .book:nth-child(11n) {
     background-color: var(--bk-pnk);
     transform:rotate(-2deg);
+    width: 2.2rem;
+    margin-right: .2rem;
 }
 .book:nth-child(12n) {
     background-color: var(--bk-aq);
-    margin-left:.35rem;
-    margin-right:.45rem;
+    margin-left: .35rem;
+    margin-right: .7rem;
     width: 1.5rem;
+    height: 7.7rem;
     transform: rotate(8deg);
 }
-.book:nth-child(13n) {
-    background-color: var(--bk-rsp);
-    transform:rotate(2deg);
+.book:nth-child(14n) {
+    background-color: var(--bk-sct);
+    margin-left: .4rem;
+    margin-right: 0rem;
+    width: 1.5rem;
+    transform: rotate(4deg);
+}
+.book:nth-child(15n) {
+    background-color: var(--bk-vio);
+    transform: rotate(2deg);
+    margin-left: 0.1rem
 }
 
 /*--CATEGORY TEXT font-family alterations--*/
@@ -128,26 +149,38 @@
 }
 .book:nth-child(9n) span {
     font-family: 'La Belle Aurore', cursive;
-    transform: translate(-50%, -50%) rotate(-90deg);
+    transform: translate(-46%, -50%) rotate(-90deg);
 }
 .book:nth-child(11n) span {
     font-family: 'Joti One', fantasy;
     font-size: var(--h5);
     transform: translate(-50%, -50%) rotate(-90deg);
 }
+.book:nth-child(12n) span {
+    font-family: 'Afacad flux', Helvetica, sans-serif;
+    font-size: var(--h5);
+    transform: translate(-51%, -50%) rotate(-90deg);
+}
+.book:nth-child(13n) span {
+    font-family: 'La Belle Aurore', cursive;
+    font-size: var(--h5);
+    transform: translate(-51%, -50%) rotate(-90deg);
+}
 .book:nth-child(14n) span {
     font-family: 'Joti One', fantasy;
     font-size: var(--h5);
-    transform: translate(-50%, -50%) rotate(-90deg);
+    transform: translate(-51%, -50%) rotate(-90deg);
 }
 /*--INTERACTIVE--*/
 .book:hover {
     transform: scale(1.1) rotate(-1deg); /* Enlarge on hover */
 }
+
 .book:active {
     transform: scale(1.05) rotate(-1deg); /* Enlarge on click */
 }
-.subj-active {
+
+.book subj-active {
     transform: scale(1.1) rotate(-1deg); /* Enlarge on hover */
     height: 8rem; /*book height*/
     border-radius: 6px;
@@ -170,123 +203,6 @@
     font-size: var(--h4);
 }
 
-/*--CATEGORY BOOK STYLING--*/
-.book:nth-child(1) {
-    background-color: var(--bk-red);
-}
-.book:nth-child(2) {
-    background-color: var(--bk-brn);
-    transform:rotate(-3deg);
-    margin-left: .3rem;
-}
-.book:nth-child(n+3) {
-    background-color: var(--bk-grn);
-}
-.book:nth-child(n+4) {
-    background-color: var(--bk-sct);
-}
-.book:nth-child(5n) {
-    background-color: var(--bk-blu);
-    transform:rotate(2deg);
-    margin-left: .3rem;
-}
-.book:nth-child(n+6) {
-    background-color: var(--bk-vio);
-}
-.book:nth-child(n+7) {
-    background-color: var(--bk-blk);
-    width: 3rem;
-}
-.book:nth-child(n+8) {
-    background-color: var(--bk-brn);
-    width: 2rem;
-}
-.book:nth-child(9n) {
-    background-color: var(--bk-blu);
-    transform:rotate(2deg);
-    margin-left: .3rem;
-}
-.book:nth-child(10n) {
-    background-color: var(--bk-grn);
-}
-.book:nth-child(12) {
-    background-color: var(--bk-rsp);
-}
-.book:nth-child(11n) {
-    background-color: var(--bk-pnk);
-    transform:rotate(-2deg);
-}
-.book:nth-child(12n) {
-    background-color: var(--bk-aq);
-    margin-left:.35rem;
-    margin-right:.45rem;
-    width: 1.5rem;
-    transform: rotate(8deg);
-}
-.book:nth-child(13n) {
-    background-color: var(--bk-rsp);
-    transform:rotate(2deg);
-}
-
-/*--CATEGORY TEXT font-family alterations--*/
-.book:nth-child(1n) span {
-    font-family: 'La Belle Aurore', cursive;
-    transform: translate(-48%, -50%) rotate(-90deg);
-}
-.book:nth-child(2n) span {
-    font-family: 'Afacad flux', Helvetica, sans-serif;
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(3n) span {
-    font-family: 'Afacad flux', Helvetica, sans-serif;
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(4n) span {
-    font-family: 'Joti One', fantasy;
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(5n) span {
-    font-family: 'Afacad flux', Helvetica, sans-serif;
-    font-size: var(--h5);
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(6n) span {
-    font-family: 'Afacad flux', Helvetica, sans-serif;
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(7n) span {
-    font-family: 'Joti One', fantasy;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    font-size: var(--h3);
-}
-.book:nth-child(8n) span {
-    font-family: 'Afacad flux', Helvetica, sans-serif;
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(9n) span {
-    font-family: 'La Belle Aurore', cursive;
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(11n) span {
-    font-family: 'Joti One', fantasy;
-    font-size: var(--h5);
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-.book:nth-child(14n) span {
-    font-family: 'Joti One', fantasy;
-    font-size: var(--h5);
-    transform: translate(-50%, -50%) rotate(-90deg);
-}
-/*--INTERACTIVE--*/
-.book:hover {
-    transform: scale(1.1) rotate(-1deg); /* Enlarge on hover */
-    transition: transform 0.2s ease-in-out;
-}
-.subj-active {
-    transform: none;
-    transform: scale(1.1) rotate(-1deg) !important; /* Enlarge on hover */
-    transition: transform 0.2s ease-in-out;
-}
 /*--RESPONSIVE--*/
 @media ( max-width: 768px ) {
     #book-nav {

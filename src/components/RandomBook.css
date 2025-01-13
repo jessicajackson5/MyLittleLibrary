@@ -1,4 +1,7 @@
 /*--RANDOM BOOK--*/
+#random-container {
+    background-color:#c47f4e !important;
+}
 .book-generator {
     display: flex;
     align-items: center;
@@ -40,6 +43,7 @@
     height: auto;
     box-shadow: 5px 5px 5px var(--dark);
     transform: rotate(-5deg);
+    z-index: 100;
 }
 .again {
     background: transparent;
@@ -63,6 +67,7 @@
     max-height: 150px;
     color: var(--text);
 }
+
 /*--RESPONSIVE--*/
 @media ( max-width: 768px ) {
     .book-generator {
@@ -74,12 +79,5 @@
         align-items: center;
         text-align: center;
         color:var(--text);
-    }
-    .book-image {
-        padding-bottom: 1rem;
-    }
-    .book-info h3 {
-        font-size: var(--h4);
-        color: var(--text);
     }
 }

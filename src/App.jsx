@@ -18,12 +18,8 @@ export default function App() {
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [listSubjectBooks, setListSubjectBooks] = useState([]);
 
-  const changeSearch = (value) => {
-    setSearch(value);
-  };
-  const changeSubject = (value) => {
-    setSubject(value);
-  };
+  const changeSearch = (value) => { setSearch(value); };
+  const changeSubject = (value) => { setSubject(value);};
 
   const [isSubLoading, setIsSubLoading] = useState(true);
   const [isSearchLoading, setIsSearchLoading] = useState(true);
@@ -233,13 +229,10 @@ export default function App() {
       // Store book title in TitleCase
       book.volumeInfo.title = title;
       // Store or replace unique books with a cover
-      if (!distinctBooks.has(title)) {
-        //title not already stored
+      if (!distinctBooks.has(title) || hasCover) {
+        //title not already stored & replace with a version that has a cover if available
         distinctBooks.set(title, book);
-      } else if (hasCover) {
-        // Replace with a version that has a cover if available
-        distinctBooks.set(title, book);
-      }
+      } 
     });
     return Array.from(distinctBooks.values());
   };
@@ -248,30 +241,28 @@ export default function App() {
     <>
       <div className="dotted">
         <Header
-          changeSearch={changeSearch}
-          changeSubject={changeSubject}
-          toTitleCase={toTitleCase}
-          resetState={resetState}
+          changeSearch = {changeSearch}
+          changeSubject = {changeSubject}
+          resetState = {resetState}
         />
-
         <Routes>
-          <Route
-            index
-            path="/"
+          <Route 
+            index 
+            path="/" 
             element={
               <Main
-                listSearchBooks={listSearchBooks}
-                search={search}
-                isSearchLoading={isSearchLoading}
-                setIsSearchLoading={setIsSearchLoading}
-                toTitleCase={toTitleCase}
-                subject={subject}
-                isSubLoading={isSubLoading}
-                setIsSubLoading={setIsSubLoading}
-                recommendedBooks={recommendedBooks}
-                isRecoLoading={isRecoLoading}
-                setIsRecoLoading={setIsRecoLoading}
-                listSubjectBooks={listSubjectBooks}
+                listSearchBooks = {listSearchBooks}
+                search = {search}
+                isSearchLoading = {isSearchLoading}
+                setIsSearchLoading = {setIsSearchLoading}
+                toTitleCase = {toTitleCase}
+                subject = {subject}
+                isSubLoading = {isSubLoading}
+                setIsSubLoading = {setIsSubLoading}
+                recommendedBooks = {recommendedBooks}
+                isRecoLoading = {isRecoLoading}
+                setIsRecoLoading = {setIsRecoLoading}
+                listSubjectBooks = {listSubjectBooks}
               />
             }
           />

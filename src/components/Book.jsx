@@ -51,13 +51,15 @@ export function Book({toTitleCase}){
                    <div className="loading-spinner"></div> 
                 ) : oneBook && oneBook.volumeInfo?.imageLinks ? (
                     <img 
-                    src={oneBook.volumeInfo?.imageLinks?.thumbnail || bookDetail.volumeInfo?.imageLinks?.smallThumbnail} 
+                    src={oneBook.volumeInfo?.imageLinks?.thumbnail || oneBook.volumeInfo?.imageLinks?.smallThumbnail} 
                     alt={oneTitle} 
                     onLoad={() => setIsLoading(false)}
                     onError={() => setIsLoading(false)} 
                     />
                 ) : (
-                <p>No image available</p>
+                    <div className="img-not-available">
+                        <p>No image available</p>
+                    </div>
                 )}
             </div>
             <div className = 'book-info'>
