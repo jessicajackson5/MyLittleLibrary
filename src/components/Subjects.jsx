@@ -1,8 +1,8 @@
 import './Subjects.css';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Subjects ({ subject, changeSubject }) {
-
+    const navigate = useNavigate();
     const bookSubjects = [
         'Romance',
         'Nonfiction',
@@ -23,6 +23,7 @@ export function Subjects ({ subject, changeSubject }) {
 
     const handleSubject = ( subject ) => {
         changeSubject(subject);
+        navigate('/');
     };
 
     return(
