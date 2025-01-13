@@ -97,6 +97,9 @@
     height: 7.7rem;
     transform: rotate(8deg);
 }
+.book:nth-child(13n) {
+    background-color: var(--bk-red);
+}
 .book:nth-child(14n) {
     background-color: var(--bk-sct);
     margin-left: .4rem;

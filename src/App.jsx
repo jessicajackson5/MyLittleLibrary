@@ -66,7 +66,7 @@ export default function App() {
       if (subject === "Nonfiction") {
         query = "subject:nonfiction";
       } else {
-        query = `subject:fiction ${subject}`;
+        query = `subject:fiction ${subject}+2024`;
       }
       try {
         const subjResponse = await axios.get(API_URL, {

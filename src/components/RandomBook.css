@@ -28,7 +28,6 @@
 }
 .loading-section {
     display:flex;
-    flex-direction: row;
 }
 .loading-info {
     width:100%;
