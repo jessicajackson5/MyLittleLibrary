@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { HiSearch } from 'react-icons/hi';
 import { Subjects } from './Subjects.jsx'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 export function Header ({ subject, changeSearch, changeSubject, resetState }) { 
     const [ prevSearch, setPrevSearch ] = useState('');
+    const navigate = useNavigate();
 
     const handleLogoClick = () => {
         resetState();
@@ -14,6 +15,7 @@ export function Header ({ subject, changeSearch, changeSubject, resetState }) {
     const handleSearch = () => {
         changeSearch( prevSearch ); //Update the parent search state
         changeSubject(''); // Clear subject if search term entered
+        navigate('/');
     };
     const handleFocus = () => {
         setPrevSearch(''); //Clear the input field

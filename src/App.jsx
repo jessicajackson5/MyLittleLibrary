@@ -15,8 +15,8 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [subject, setSubject] = useState("");
   const [listSearchBooks, setListSearchBooks] = useState([]);
-  const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [listSubjectBooks, setListSubjectBooks] = useState([]);
+  const [recommendedBooks, setRecommendedBooks] = useState([]);
 
   const changeSearch = (value) => { setSearch(value); };
   const changeSubject = (value) => { setSubject(value); };
