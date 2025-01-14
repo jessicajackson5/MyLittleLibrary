@@ -59,7 +59,6 @@ export default function App() {
         setIsRecoLoading(false);
       }
     };
-
     const getSubjectBooks = async () => {
       setIsSubLoading(true); // Show spinner before fetch
       let query = "";

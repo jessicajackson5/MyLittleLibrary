@@ -82,7 +82,7 @@ p { font-weight: 100; }
     color: var(--text);
 }
 
-/* ONE BOOK HIGHLIGHT - SHARED - GRADIENT BACKGROUND SPEECH BUBBLE */
+/* BOOK HIGHLIGHT - SHARED - GRADIENT BACKGROUND SPEECH BUBBLE */
 .book-info {
     /* From https://css-generators.com/tooltip-speech-bubble/ */
     margin-top: -1rem;
@@ -131,19 +131,6 @@ p { font-weight: 100; }
     box-shadow: 3px 3px 3px var(--dark);
 }
 
-/*--ONE BOOK DETAIL--*/
-.one-book {
-    display:grid;
-    grid-template-columns: 160px 4fr;
-    align-items: center;
-    justify-content: center;
-    text-overflow: ellipsis;
-    white-space: normal;
-    overflow: hidden;
-    padding-top: 2rem;
-    margin-bottom: 1rem;
-}
-
 /*--RESPONSIVE--*/
 @media ( max-width: 1140px ) {
     /*--LIST BOOKS - SHARED BY COMPONENTS--*/
@@ -158,20 +145,8 @@ p { font-weight: 100; }
     }
 }
 @media ( max-width: 768px ) {
-    /*--LIST BOOKS - SHARED BY COMPONENTS
-    #list-books {
-        grid-template-columns: repeat(3, 1fr);
-        align-items: center;
-    }*/
     .book-card {
         padding: 1rem;
-    }
-    /*--ONE BOOK RESPONSIVE--*/
-    .one-book {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
     }
     /* Shift speech bubble triangle to top */
     .book-info{

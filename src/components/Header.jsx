@@ -1,23 +1,24 @@
 import { useState } from 'react';
-import { HiSearch } from 'react-icons/hi';
-import { Link, useNavigate } from 'react-router-dom';
+import { HiSearch, HiArrowLeft } from 'react-icons/hi';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
 export function Header ({ changeSearch, resetState }) { 
     const [ prevSearch, setPrevSearch ] = useState('');
+    const location = useLocation();
     const navigate = useNavigate();
 
+    const isDetailPage = location.pathname.startsWith('/book/');
     const handleLogoClick = () => {
         resetState();
-        setPrevSearch(''); //Clear the input field
+        setPrevSearch(''); 
     };
     const handleSearch = () => {
-        changeSearch( prevSearch ); //Update the parent search state
-        // changeSubject(''); // Clear subject if search term entered
+        changeSearch( prevSearch ); 
         navigate('/');
     };
     const handleFocus = () => {
-        setPrevSearch(''); //Clear the input field
+        setPrevSearch(''); 
     };
     const handleKeyPress = (event) => {
         if ( event.key === 'Enter' ) {
@@ -28,8 +29,15 @@ export function Header ({ changeSearch, resetState }) {
     return(
         <>
             <header id = 'header' className = 'container'>
+                <div className = 'back-contain'>
+                    {isDetailPage && (
+                    <button
+                            className = 'back-button'
+                            onClick={() => navigate(-1)}
+                        ><HiArrowLeft /></button>
+                    )}
+                </div>
                 <div className = 'left-content'>
-                    {/*Logo and title*/}
                     <Link to = '/' className = 'logo' onClick = { handleLogoClick } >
                         <img src = '/images/popArtReader.jpg' alt = 'Site logo is a woman reading a book' />
                     </Link>
@@ -42,8 +50,8 @@ export function Header ({ changeSearch, resetState }) {
                         placeholder = 'Search author, title, subject, etc.'
                         className = 'input'
                         value = { prevSearch }
-                        onChange = { (e) => setPrevSearch(e.target.value) } // Update local input state
-                        onFocus = { handleFocus } // Clear field
+                        onChange = { (e) => setPrevSearch(e.target.value) } 
+                        onFocus = { handleFocus } // Clear search text to prep for new input
                         onKeyDown = { handleKeyPress } // Trigger search by key press Enter
                     />
                     <button className = 'button' onClick = { handleSearch } aria-label = 'Submit Search'><HiSearch /></button>

@@ -1,7 +1,4 @@
 /*--RANDOM BOOK--*/
-#random-container {
-    background-color:#c47f4e !important;
-}
 .book-generator {
     display: flex;
     align-items: center;

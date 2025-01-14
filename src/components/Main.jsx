@@ -24,12 +24,13 @@ export function Main({
             {/* Case 1: Show RandomBook & Recommended*/}
             {!search && !subject &&(
                 <>
-                    <RandomBook toTitleCase={toTitleCase}/>
+                    <RandomBook toTitleCase = {toTitleCase}/>
                     <RecommendedBooks 
-                        toTitleCase={toTitleCase} 
-                        recommendedBooks={recommendedBooks} 
-                        isRecoLoading={isRecoLoading} 
-                        setIsRecoLoading={setIsRecoLoading}  
+                        toTitleCase = {toTitleCase} 
+                        recommendedBooks = {recommendedBooks} 
+                        isRecoLoading = {isRecoLoading} 
+                        setIsRecoLoading = {setIsRecoLoading} 
+                        loadNewBooks = {loadNewBooks} 
                     />
                 </>
             )}

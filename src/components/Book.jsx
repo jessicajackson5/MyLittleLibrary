@@ -1,6 +1,7 @@
 import { useEffect,useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './Book.css';
 
 
 export function Book({toTitleCase}){
@@ -45,43 +46,45 @@ export function Book({toTitleCase}){
     },[id]);
 
     return(
-        <div className="container one-book">
-            <div className = {`book-image ${isLoading ? 'loading' : ''}`}>
-               {isLoading ? (
-                   <div className="loading-spinner"></div> 
-                ) : oneBook && oneBook.volumeInfo?.imageLinks ? (
-                    <img 
-                    src={oneBook.volumeInfo?.imageLinks?.thumbnail || oneBook.volumeInfo?.imageLinks?.smallThumbnail} 
-                    alt={oneTitle} 
-                    onLoad={() => setIsLoading(false)}
-                    onError={() => setIsLoading(false)} 
-                    />
-                ) : (
-                    <div className="img-not-available">
-                        <p>No image available</p>
-                    </div>
-                )}
-            </div>
-            <div className = 'book-info'>
-                {isLoading? (
-                <p>Loading book details...</p>
-                ) : (
-                <>
-                    <h3>{oneTitle || 'Untitled'}</h3>
-                    <p> by {oneBook?.volumeInfo?.authors && Array.isArray(oneBook.volumeInfo.authors) && oneBook.volumeInfo.authors.length > 0
-                        ? toTitleCase(oneBook.volumeInfo.authors.join(', '))
-                        : 'Unknown Author'}
-                    </p>
-                    <p>Publisher : {oneBook.volumeInfo?.publisher || 'Unknown Publisher'}</p>
-                    <p>Publication Date: {oneBook.volumeInfo?.publishedDate || 'Publication Date Unknown'}</p>
-                    <p>ISBN-13: {oneBook.volumeInfo?.industryIdentifiers?.find(
-                        (identifier) => identifier.type === 'ISBN_13'
-                        )?.identifier || 'ISBN-13 Not Found'}
-                    </p>
-                    <br />
-                    <p>{oneDescription}</p>
-                </>
-                )}
+        <div className = 'container'>
+            <div className = 'one-book'>
+                <div className = {`book-image ${isLoading ? 'loading' : ''}`}>
+                {isLoading ? (
+                    <div className="loading-spinner"></div> 
+                    ) : oneBook && oneBook.volumeInfo?.imageLinks ? (
+                        <img 
+                        src={oneBook.volumeInfo?.imageLinks?.thumbnail || oneBook.volumeInfo?.imageLinks?.smallThumbnail} 
+                        alt={oneTitle} 
+                        onLoad={() => setIsLoading(false)}
+                        onError={() => setIsLoading(false)} 
+                        />
+                    ) : (
+                        <div className="img-not-available">
+                            <p>No image available</p>
+                        </div>
+                    )}
+                </div>
+                <div className = 'book-info'>
+                    {isLoading? (
+                    <p>Loading book details...</p>
+                    ) : (
+                    <>
+                        <h3>{oneTitle || 'Untitled'}</h3>
+                        <p> by {oneBook?.volumeInfo?.authors && Array.isArray(oneBook.volumeInfo.authors) && oneBook.volumeInfo.authors.length > 0
+                            ? toTitleCase(oneBook.volumeInfo.authors.join(', '))
+                            : 'Unknown Author'}
+                        </p>
+                        <p>Publisher : {oneBook.volumeInfo?.publisher || 'Unknown Publisher'}</p>
+                        <p>Publication Date: {oneBook.volumeInfo?.publishedDate || 'Publication Date Unknown'}</p>
+                        <p>ISBN-13: {oneBook.volumeInfo?.industryIdentifiers?.find(
+                            (identifier) => identifier.type === 'ISBN_13'
+                            )?.identifier || 'ISBN-13 Not Found'}
+                        </p>
+                        <br />
+                        <p>{oneDescription}</p>
+                    </>
+                    )}
+                </div>
             </div>
         </div>
     );
