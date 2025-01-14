@@ -25,6 +25,18 @@ export default function App() {
   const [isSearchLoading, setIsSearchLoading] = useState(true);
   const [isRecoLoading, setIsRecoLoading] = useState(true);
 
+  const currentList = subject
+    ? listSubjectBooks
+    : search
+    ? listSearchBooks
+    : recommendedBooks || [];
+  
+  const isLoading = subject
+    ? isSubLoading
+    : search
+    ? isSearchLoading
+    : isRecoLoading;
+  
   const resetState = () => {
     setSearch("");
     setSubject("");
@@ -251,19 +263,12 @@ export default function App() {
             path="/" 
             element={
               <Main
-                listSearchBooks = {listSearchBooks}
+                currentList = {currentList}
+                isLoading = {isLoading}
                 search = {search}
-                isSearchLoading = {isSearchLoading}
-                setIsSearchLoading = {setIsSearchLoading}
                 toTitleCase = {toTitleCase}
                 subject = {subject}
                 changeSubject = {changeSubject}
-                isSubLoading = {isSubLoading}
-                setIsSubLoading = {setIsSubLoading}
-                recommendedBooks = {recommendedBooks}
-                isRecoLoading = {isRecoLoading}
-                setIsRecoLoading = {setIsRecoLoading}
-                listSubjectBooks = {listSubjectBooks}
               />
             }
           />

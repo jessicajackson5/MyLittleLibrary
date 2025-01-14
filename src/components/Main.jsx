@@ -1,114 +1,75 @@
 import { RandomBook } from './RandomBook';
-import { RecommendedBooks } from './RecommendedBooks';
-import { Subjects } from './Subjects.jsx'
+import { Subjects } from './Subjects.jsx';
 import { Link } from 'react-router-dom';
 
 
 export function Main({
+    currentList,
+    isLoading,
     search, 
-    listSearchBooks, 
     subject,
     changeSubject, 
-    listSubjectBooks, 
     toTitleCase, 
-    recommendedBooks,
-    isRecoLoading, 
-    setIsRecoLoading, 
-    isSearchLoading, 
-    isSubLoading, 
   }){
+    
+    let title = "";
+    let errorMessage = "No results. Please enter an alternate search term or select a different subject.";
+
+    if (subject) {
+        title = `The Best ${toTitleCase(subject)} Books`;
+        errorMessage = 'No results. Please enter select another subject.';
+    } else if (search) {
+        title = `Results for "${search}"`;
+        errorMessage = 'No results. Please enter alternate search term(s).';
+    } else { 
+        title = 'The Best Books of the Year';
+        errorMessage = 'No results. Please enter select a subject or search term(s).';
+    }
     
     return (
         <>
             <Subjects subject = {subject} changeSubject = {changeSubject}/>
-            {/* Case 1: Show RandomBook & Recommended*/}
+            {/* Show RandomBook */}
             {!search && !subject &&(
                 <>
                     <RandomBook toTitleCase = {toTitleCase}/>
-                    <RecommendedBooks 
-                        toTitleCase = {toTitleCase} 
-                        recommendedBooks = {recommendedBooks} 
-                        isRecoLoading = {isRecoLoading} 
-                        setIsRecoLoading = {setIsRecoLoading} 
-                        loadNewBooks = {loadNewBooks} 
-                    />
                 </>
             )}
-            {/* Case 2: Show books by Subject only*/}
-            {subject && listSubjectBooks.length > 0 &&(
-                <section className = "container" id="list-container">
-                    <div className="title-container">
-                        <h2>The Best {toTitleCase(subject)} Books</h2>
-                    </div>
-                    <div id="list-books">
-                        {isSubLoading || !listSubjectBooks ? (
-                            // Show loading spinner for each book card while loading
-                            Array.from({ length: 10 }).map((_, index) => (
-                                <div key={index} className="book-card">
-                                    <div className="load">
-                                        <div className="load-spin"></div>
-                                    </div>
+            {/* Show books */}
+            <section className = "container" id = "list-container">
+                <div className = "title-container">
+                    <h2>{title}</h2>
+                </div>
+                <div id="list-books">
+                    {isLoading || !currentList.length ? (
+                        // Show loading spinner for each book card while loading
+                        Array.from({ length: 10 }).map((_, index) => (
+                            <div key = {index} className="book-card">
+                                <div className="load">
+                                    <div className="load-spin"></div>
                                 </div>
-                            ))
-                        ): listSubjectBooks.length > 0 ? 
-                            (listSubjectBooks.map((item,index) => (
-                                <Link key={index} className="book-card" to={`/book/${item.id}`}>
-                                    {item.volumeInfo?.imageLinks ? (
-                                        <img 
-                                            src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail} 
-                                            alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
-                                        />
-                                    ) : (
-                                        <div className="no-image">
-                                            <p>No image available</p>
-                                        </div>
-                                        )}
-                                        <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
-                                </Link>
-                            ))): (
-                                <p>No results. Please enter alternate search term(s).</p>
-                              )}
-                        </div>
-                </section>
-            )}
-            {/* Case 3: Show Search Results only*/}
-            {search && listSearchBooks.length > 0 && (
-                <section className = "container" id="list-container">
-                    <div className="title-container">
-                        <h2>Results for "{search}"</h2>
-                    </div>
-                    <div id="list-books">
-                        {isSearchLoading || !listSearchBooks ? (
-                            // Show loading spinner for each book card while loading
-                            Array.from({ length: 10 }).map((_, index) => (
-                                <div key={index} className="book-card">
-                                    <div className="load">
-                                        <div className="load-spin"></div>
+                            </div>
+                        ))
+                    ): currentList.length > 0 ? 
+                        (currentList.map((item,index) => (
+                            <Link key={index} className="book-card" to={`/book/${item.id}`}>
+                                {item.volumeInfo?.imageLinks ? (
+                                    <img 
+                                        src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail} 
+                                        alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
+                                    />
+                                ) : (
+                                    <div className="no-image">
+                                        <p>No image available</p>
                                     </div>
-                                </div>
-                            ))
-                        ): listSearchBooks.length > 0 ? 
-                            (listSearchBooks.map((item,index) => (
-                                <Link key={index} className="book-card" to={`/book/${item.id}`}>
-                                    {item.volumeInfo?.imageLinks ? (
-                                        <img 
-                                            src={ item.volumeInfo?.imageLinks?.thumbnail || item.volumeInfo?.imageLinks?.smallThumbnail} 
-                                            alt={toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}
-                                        />
-                                    ) : (
-                                        <div className="no-image">
-                                            <p>No image available</p>
-                                        </div>
-                                        )}
-                                        <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
-                                </Link>
-                            ))): (
-                                <p>No results. Please enter alternate search term(s).</p>
-                              )}
-                    </div>
-                </section>
-            )}
-            
+                                    )}
+                                    <h4> {toTitleCase(item.volumeInfo?.title.trim() || 'Untitled')}</h4>
+                            </Link>
+                        ))): (
+                            <p>{errorMessage}</p>
+                    )}
+                </div>
+            </section>
         </>
     );
 }
