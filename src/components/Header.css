@@ -19,7 +19,7 @@
 .back-button {
     position: absolute;
     transform: translate(0,0);
-    left: -20px;
+    left: -40px;
     top: -8px;
     color:var(--text);
     background-color: transparent;
@@ -81,6 +81,8 @@ input:focus {
 @media ( max-width: 768px)  {
     .container { padding-inline: 8%; }
     .back-button {
+        transform: translate(0,0);
+        left: -20px;
         padding-left: 3rem;
     }
     #header {
