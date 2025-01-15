@@ -56,6 +56,7 @@ export default function App() {
             q: recoQuery,
             key: API_KEY,
             langRestrict: "en",
+            maxResults: 15
           },
         });
         if (recoResponse.data.items && recoResponse.data.items.length > 0) {
@@ -85,6 +86,7 @@ export default function App() {
             q: query,
             key: API_KEY,
             langRestrict: "en",
+            maxResults: 15
           },
         });
         if (subjResponse.data.items && subjResponse.data.items.length > 0) {
@@ -110,6 +112,7 @@ export default function App() {
             q: search,
             key: API_KEY,
             langRestrict: "en",
+            maxResults: 15
           },
         });
         if (response.data.items && response.data.items.length > 0) {
