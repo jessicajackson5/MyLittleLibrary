@@ -184,19 +184,6 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
     z-index: 10;
 }
-.book span {
-    transform: rotate(-90deg); /* Rotate the text */
-    display: block;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis; /* Cut off long titles */
-    position: absolute;
-    left: 50%; /*Center text horizontally */
-    top: 50%; /* Center text vertically */
-    transform-origin: center; /* Rotate around the center */
-    transform: translate(-50%, -50%) rotate(-90deg);
-    color: var(--text);
-    font-size: var(--h4);
-}
 
 /*--RESPONSIVE--*/
 @media ( max-width: 768px ) {
