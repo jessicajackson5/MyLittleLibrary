@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     gap: .75rem;
-    padding-right: 0.75rem;
+    padding-right: 1rem;
 }
 .back-contain {
     display: flex;
