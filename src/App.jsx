@@ -8,8 +8,7 @@ import { Main } from "./components/Main";
 import { Book } from "./components/Book";
 
 export default function App() {
-  //const API_KEY = 'AIzaSyDyRTkUq9YuhUSuZsQz77ftIfNLMukP4vc'; //dev
-  const API_KEY = "AIzaSyCUKqGdOyqRqN4nmOuZBbFmtNib4758EUY"; //email
+  const API_KEY = "AIzaSyCUKqGdOyqRqN4nmOuZBbFmtNib4758EUY"; 
   const API_URL = "https://www.googleapis.com/books/v1/volumes";
 
   const [search, setSearch] = useState("");
