@@ -18,12 +18,19 @@ export default function App() {
   const [listSubjectBooks, setListSubjectBooks] = useState([]);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
 
-  const changeSearch = (value) => { setSearch(value); };
-  const changeSubject = (value) => { setSubject(value); };
-
   const [isSubLoading, setIsSubLoading] = useState(true);
   const [isSearchLoading, setIsSearchLoading] = useState(true);
   const [isRecoLoading, setIsRecoLoading] = useState(true);
+
+  const changeSearch = (value) => { 
+    setSearch(value); 
+    setSubject("");
+  };
+
+  const changeSubject = (value) => { 
+    setSubject(value); 
+    setSearch("")
+  };
 
   const currentList = subject
     ? listSubjectBooks
